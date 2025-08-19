@@ -10,7 +10,7 @@
     "check:types": "turbo run check:types",
     "dev": "turbo run dev",
     "format": "biome format --write --use-editorconfig true",
-    "release": "turbo run --concurrency=1 release",
+    "release": "bun run --filter '*' release",
     "plop": "NODE_OPTIONS='--import tsx' plop --plopfile=plopfile.ts"
   },
   "devDependencies": {
