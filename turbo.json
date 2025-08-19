@@ -12,6 +12,9 @@
     },
     "check:types": {
       "inputs": ["src/**"]
+    },
+    "release": {
+      "cache": false
     }
   }
 }
