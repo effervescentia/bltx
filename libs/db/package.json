@@ -10,7 +10,7 @@
     "access": "public"
   },
   "scripts": {
-    "release": "bun run pkg:release"
+    "release": "semantic-release -e semantic-release-monorepo"
   },
   "dependencies": {
     "ts-pattern": "5.7.1",
