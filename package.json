@@ -10,8 +10,10 @@
     "check:types": "turbo run check:types",
     "dev": "turbo run dev",
     "format": "biome format --write --use-editorconfig true",
-    "release": "semantic-release",
-    "plop": "NODE_OPTIONS='--import tsx' plop --plopfile=plopfile.ts"
+    "release": "turbo run --concurrency=1 release",
+    "plop": "NODE_OPTIONS='--import tsx' plop --plopfile=plopfile.ts",
+
+    "pkg:release": "semantic-release -e semantic-release-monorepo"
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.5",

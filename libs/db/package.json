@@ -9,6 +9,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "scripts": {
+    "release": "bun run pkg:release"
+  },
   "dependencies": {
     "ts-pattern": "5.7.1",
     "type-fest": "4.41.0"
