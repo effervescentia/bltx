@@ -30,10 +30,12 @@ jobs:
         run: bun install --frozen-lockfile
       - name: Set git credentials
         env:
+          GH_USER: ${{ secrets.GH_USER }}
+          GH_EMAIL: ${{ secrets.GH_EMAIL }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          git config user.name "effervescentia"
-          git config user.email "ben.l.teichman@gmail.com"
+          git config user.name "$GH_USER"
+          git config user.email "$GH_EMAIL"
           git remote set-url origin "https://$GH_TOKEN@github.com/effervescentia/bltx"
       - name: Release
         env:
