@@ -1,8 +1,16 @@
 # Change Log - @bltx/core
 
-<!-- This log was last generated on Fri, 03 Oct 2025 05:13:48 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 03 Oct 2025 18:15:32 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.1.0
+
+Fri, 03 Oct 2025 18:15:32 GMT
+
+### Minor changes
+
+- feat: add AnyRecord type (ben@voiceflow.com)
 
 ## 1.0.2
 
