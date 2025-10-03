@@ -1,6 +1,6 @@
 {
   "name": "@bltx/db",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "main": "src/main.ts",
   "files": [
@@ -8,9 +8,6 @@
   ],
   "publishConfig": {
     "access": "public"
-  },
-  "scripts": {
-    "release": "semantic-release -e semantic-release-monorepo"
   },
   "dependencies": {
     "ts-pattern": "5.7.1",

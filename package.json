@@ -1,24 +1,29 @@
 {
   "name": "bltx",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/effervescentia/bltx.git"
+  },
   "workspaces": [
     "libs/*"
   ],
   "scripts": {
     "build": "turbo run build",
+    "change": "beachball change",
     "check": "biome check --use-editorconfig true",
+    "check:changes": "beachball check",
     "check:types": "turbo run check:types",
     "dev": "turbo run dev",
     "format": "biome format --write --use-editorconfig true",
-    "release": "turbo run --concurrency=1 release",
+    "release": "beachball publish",
     "plop": "NODE_OPTIONS='--import tsx' plop --plopfile=plopfile.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.5",
     "@tsconfig/bun": "1.0.7",
     "@types/bun": "1.1.14",
-    "semantic-release": "24.2.7",
-    "semantic-release-monorepo": "8.0.2",
+    "beachball": "2.55.1",
     "tsx": "4.19.4",
     "turbo": "2.5.2",
     "typescript": "5.7.2"
