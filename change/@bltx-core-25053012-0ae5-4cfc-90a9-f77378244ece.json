@@ -1,0 +1,7 @@
+{
+  "type": "major",
+  "comment": "feat: initial release",
+  "packageName": "@bltx/core",
+  "email": "ben@voiceflow.com",
+  "dependentChangeType": "patch"
+}
