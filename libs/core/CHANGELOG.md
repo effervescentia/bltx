@@ -1,8 +1,16 @@
 # Change Log - @bltx/core
 
-<!-- This log was last generated on Fri, 03 Oct 2025 03:57:57 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 03 Oct 2025 05:13:48 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.0.2
+
+Fri, 03 Oct 2025 05:13:48 GMT
+
+### Patches
+
+- fix: correct generic environment schema type (ben@voiceflow.com)
 
 ## 1.0.0
 
