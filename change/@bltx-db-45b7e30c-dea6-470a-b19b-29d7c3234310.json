@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "feat: dbPush helper",
-  "packageName": "@bltx/db",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}
