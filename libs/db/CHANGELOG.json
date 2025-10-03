@@ -1,0 +1,20 @@
+{
+  "name": "@bltx/db",
+  "entries": [
+    {
+      "date": "Fri, 03 Oct 2025 03:57:57 GMT",
+      "version": "1.1.0",
+      "tag": "@bltx/db_v1.1.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ben@voiceflow.com",
+            "package": "@bltx/db",
+            "commit": "8619916db784ad4f149baecfc4ae1ac808928886",
+            "comment": "feat: initial realease"
+          }
+        ]
+      }
+    }
+  ]
+}

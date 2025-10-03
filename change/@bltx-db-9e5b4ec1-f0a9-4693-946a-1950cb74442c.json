@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "feat: initial realease",
-  "packageName": "@bltx/db",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}
