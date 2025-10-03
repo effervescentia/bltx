@@ -1,10 +1,9 @@
-/** biome-ignore-all lint/suspicious/noExplicitAny: needed for generic type */
-
+import type { AnyRecord } from '@bltx/core';
 import type { SQL } from 'drizzle-orm';
 import type { PgTable } from 'drizzle-orm/pg-core';
 import type { Database } from '../db.types';
 
-export const insertOne = async <Schema extends Record<string, any>, Table extends PgTable>(
+export const insertOne = async <Schema extends AnyRecord, Table extends PgTable>(
   db: Database<Schema>,
   table: Table,
   values: Table['$inferInsert'],
@@ -13,7 +12,7 @@ export const insertOne = async <Schema extends Record<string, any>, Table extend
   return results[0] as Table['$inferSelect'];
 };
 
-export const updateOne = async <Schema extends Record<string, any>, Table extends PgTable>(
+export const updateOne = async <Schema extends AnyRecord, Table extends PgTable>(
   db: Database<Schema>,
   table: Table,
   where: SQL,

@@ -1,3 +1,4 @@
+import type { AnyRecord } from '@bltx/core';
 import { PGlite, type PGliteOptions } from '@electric-sql/pglite';
 import { cube } from '@electric-sql/pglite/contrib/cube';
 import { earthdistance } from '@electric-sql/pglite/contrib/earthdistance';
@@ -12,8 +13,7 @@ export const createDatabaseClient = (options?: PGliteOptions) =>
     ...options,
   });
 
-// biome-ignore lint/suspicious/noExplicitAny: needed for generic type
-export const createDatabasePlugin = <Schema extends Record<string, any>>(schema: Schema) =>
+export const createDatabasePlugin = <Schema extends AnyRecord>(schema: Schema) =>
   new Elysia({ name: 'plugin.database' }).use((app) => {
     const client = createDatabaseClient({ dataDir: './data.db' });
     const db = drizzle({ client, schema });
