@@ -16,7 +16,7 @@
     "check:types": "turbo run check:types",
     "dev": "turbo run dev",
     "format": "biome format --write --use-editorconfig true",
-    "release": "beachball publish",
+    "release": "beachball publish --message 'ci(release): bump versions and generate changelogs [skip ci]'",
     "plop": "NODE_OPTIONS='--import tsx' plop --plopfile=plopfile.ts"
   },
   "devDependencies": {
