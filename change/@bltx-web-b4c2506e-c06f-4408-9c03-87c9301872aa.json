@@ -1,7 +1,0 @@
-{
-  "type": "major",
-  "comment": "feat: add web lib",
-  "packageName": "@bltx/web",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}
