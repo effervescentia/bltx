@@ -1,0 +1,9 @@
+{{#if withProps}}
+export interface {{pascalCase name}}Props {{propsInterface}}
+
+{{/if}}
+export const {{pascalCase name}}: React.FC{{#if withProps}}<{{pascalCase name}}Props>{{/if}} = ({{propsDestruct}}) => {
+  // TODO: implement me
+
+  return null;
+};
