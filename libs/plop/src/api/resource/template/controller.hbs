@@ -1,5 +1,81 @@
 import { DatabasePlugin } from '@api/db/db.plugin';
-import Elysia from 'elysia';
+import Elysia{{#if withCRUD}}, { t }{{/if}} from 'elysia';
+{{#if withService}}import { {{pascalCase name}}Service } from './{{kebabCase name}}.service';{{/if}}
+{{#if withCRUD}}
+import { eq } from 'drizzle-orm';
+import { {{pascalCase name}}DB } from './data/{{kebabCase name}}.db';
+import { {{pascalCase name}}DTO } from './data/{{kebabCase name}}.dto';
+import { Create{{pascalCase name}}Request } from './data/create-{{kebabCase name}}.req';
+import { Patch{{pascalCase name}}Request } from './data/patch-{{kebabCase name}}.req';
+
+const {{pascalCase name}}Params = t.Object({ {{camelCase name}}ID: t.String({ format: 'uuid' }) });
+{{/if}}
 
 export const {{pascalCase name}}Controller = new Elysia({ prefix: '/{{kebabCase name}}' })
-  .use(DatabasePlugin);
+  .use(DatabasePlugin)
+  {{#if withService}}
+  .derive({ as: 'scoped' }, ({ db }) => ({ service: new {{pascalCase name}}Service(db()) }))
+  {{/if}}
+  {{#if withCRUD}}
+  
+  .get(
+    '/',
+    async ({ db }) => {
+      return db().query.{{pascalCase name}}DB.findMany();
+    },
+    {
+      response: t.Array({{pascalCase name}}DTO),
+    },
+  )
+
+  .post(
+    '/',
+    async ({ service, body }) => {
+      return service.create(body);
+    },
+    {
+      body: Create{{pascalCase name}}Request,
+      response: {{pascalCase name}}DTO,
+    },
+  )
+
+  .get(
+    '/:{{camelCase name}}ID',
+    async ({ db, params, status }) => {
+      const {{camelCase name}} = await db().query.{{pascalCase name}}DB.findFirst({ where: eq({{pascalCase name}}DB.id, params.{{camelCase name}}ID) });
+      if (!{{camelCase name}}) return status(404, `No {{pascalCase name}} exists with ID '${params.{{camelCase name}}ID}'`);
+
+      return {{camelCase name}};
+    },
+    {
+      params: {{pascalCase name}}Params,
+      response: {
+        200: {{pascalCase name}}DTO,
+        404: t.String(),
+      },
+    },
+  )
+
+  .patch(
+    '/:{{camelCase name}}ID',
+    async ({ service, params, body }) => {
+      return service.patch(params.{{camelCase name}}ID, body);
+    },
+    {
+      params: {{pascalCase name}}Params,
+      body: Patch{{pascalCase name}}Request,
+      response: {{pascalCase name}}DTO,
+    },
+  )
+
+  .delete(
+    '/:{{camelCase name}}ID',
+    async ({ service, params }) => {
+      await service.delete(params.{{camelCase name}}ID);
+    },
+    {
+      params: {{pascalCase name}}Params,
+    },
+  )
+  {{/if}}
+  ;

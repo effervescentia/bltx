@@ -1,0 +1,8 @@
+import { type Static, t } from 'elysia';
+import { {{pascalCase name}}DTO } from './{{kebabCase name}}.dto';
+
+export type Patch{{pascalCase name}} = Static<typeof Patch{{pascalCase name}}Request>;
+
+export const Patch{{pascalCase name}}Request = t.Partial(t.Pick({{pascalCase name}}DTO, [
+  // TODO: implement me
+]));

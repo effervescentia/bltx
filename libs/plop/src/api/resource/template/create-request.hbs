@@ -1,0 +1,8 @@
+import { type Static, t } from 'elysia';
+import { {{pascalCase name}}DTO } from './{{kebabCase name}}.dto';
+
+export type Create{{pascalCase name}} = Static<typeof Create{{pascalCase name}}Request>;
+
+export const Create{{pascalCase name}}Request = t.Pick({{pascalCase name}}DTO, [
+  // TODO: implement me
+]);
