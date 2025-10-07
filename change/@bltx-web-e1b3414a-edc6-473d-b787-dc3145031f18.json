@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix: export DialogContext",
-  "packageName": "@bltx/web",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}

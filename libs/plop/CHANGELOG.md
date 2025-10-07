@@ -1,8 +1,16 @@
 # Change Log - @bltx/plop
 
-<!-- This log was last generated on Tue, 07 Oct 2025 20:51:35 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 07 Oct 2025 22:26:36 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.3.0
+
+Tue, 07 Oct 2025 22:26:36 GMT
+
+### Minor changes
+
+- feat: use Dialog from web lib (ben@voiceflow.com)
 
 ## 1.2.0
 
