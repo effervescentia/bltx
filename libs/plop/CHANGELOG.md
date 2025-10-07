@@ -1,8 +1,16 @@
 # Change Log - @bltx/plop
 
-<!-- This log was last generated on Tue, 07 Oct 2025 19:44:10 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 07 Oct 2025 20:51:35 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.2.0
+
+Tue, 07 Oct 2025 20:51:35 GMT
+
+### Minor changes
+
+- feat: add CRUD resource generator (ben@voiceflow.com)
 
 ## 1.1.0
 
