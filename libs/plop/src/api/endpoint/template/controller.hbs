@@ -1,0 +1,25 @@
+
+  .{{method}}(
+    '{{path}}',
+    async ({ {{#if withParams}}params, {{/if}}{{#if withQuery}}query, {{/if}}{{#if withRequest}}body, {{/if}}}) => {
+      // TODO: implement me
+
+      return null;
+    },
+    {{#if withDTOs}}
+    {
+      {{#if withParams}}
+      params: t.Object({
+{{paramsSchema}}
+      }),
+      {{/if}}
+      {{#if withQuery}}
+      query: t.Object({
+        // TODO: implement me
+      }),
+      {{/if}}
+      {{#if withRequest}}request: {{pascalCase requestName}}Request,{{/if}}
+      {{#if withResponse}}response: {{pascalCase responseName}}Response,{{/if}}
+    },
+    {{/if}}
+  )

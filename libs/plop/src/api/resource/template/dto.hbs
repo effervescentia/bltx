@@ -1,0 +1,7 @@
+import { type Static, t } from 'elysia';
+
+export type {{pascalCase name}} = Static<typeof {{pascalCase name}}DTO>;
+
+export const {{pascalCase name}}DTO = t.Object({
+  id: t.String({ format: 'uuid' }),
+});

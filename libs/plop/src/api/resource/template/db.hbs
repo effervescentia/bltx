@@ -1,0 +1,11 @@
+import { id } from '@bltx/db';
+import { relations } from 'drizzle-orm';
+import { pgTable } from 'drizzle-orm/pg-core';
+
+export const {{pascalCase name}}DB = pgTable('{{snakeCase name}}', {
+  id: id('id'),
+});
+
+export const {{pascalCase name}}Relations = relations({{pascalCase name}}DB, ({}) => ({
+  // TODO: implement me
+}));

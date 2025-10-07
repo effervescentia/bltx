@@ -1,0 +1,5 @@
+{{#if withDatabase}}
+import { DataService } from '@api/global/data.service';
+
+{{/if}}
+export class {{pascalCase name}}Service{{#if withDatabase}} extends DataService{{/if}} {}

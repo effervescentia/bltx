@@ -1,0 +1,23 @@
+{{{bltxImportTemplate}}}
+{{#if withRelations}}
+import { relations } from 'drizzle-orm';
+{{/if}}
+import { pgTable{{#if importSerialColumn}}, serial{{/if}}{{#if isCompositeID}}, index, primaryKey{{/if}} } from 'drizzle-orm/pg-core';
+
+export const {{pascalCase name}}DB = pgTable(
+  '{{snakeCase name}}',
+  {
+{{{idColumnsTemplate}}}
+    {{#if withTimestamps}}
+    ...timestamps,
+    {{/if}}
+    // TODO: implement me
+  },
+  {{{indexTemplate}}}
+);
+{{#if withRelations}}
+
+export const {{pascalCase name}}Relations = relations({{pascalCase name}}DB, ({}) => ({
+  // TODO: implement me
+}));
+{{/if}}
