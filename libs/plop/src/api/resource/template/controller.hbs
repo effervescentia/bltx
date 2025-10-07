@@ -1,0 +1,5 @@
+import { DatabasePlugin } from '@api/db/db.plugin';
+import Elysia from 'elysia';
+
+export const {{pascalCase name}}Controller = new Elysia({ prefix: '/{{kebabCase name}}' })
+  .use(DatabasePlugin);

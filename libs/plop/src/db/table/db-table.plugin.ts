@@ -24,10 +24,10 @@ export const dbTablePlugin = (plop: NodePlopAPI) => {
           name: string;
           withRelations: boolean;
           withDTO: boolean;
+          withTimestamps: boolean;
           withID: boolean;
           idColumnType?: IDColumnType;
           isCompositeID?: boolean;
-          withTimestamps: boolean;
         }>([
           {
             type: 'input',

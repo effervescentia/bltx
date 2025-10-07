@@ -1,8 +1,7 @@
 import path from 'node:path';
 
 import type { NodePlopAPI } from 'plop';
-
-const PARAM_REGEX = /(?=:\w+\??)|(?<=:\w+\??)(?![\w?])/;
+import { PARAM_REGEX } from '../../constants';
 
 export const webPagePlugin = (plop: NodePlopAPI) => {
   plop.setGenerator('web:page', {

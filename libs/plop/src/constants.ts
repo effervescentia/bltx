@@ -1,0 +1,1 @@
+export const PARAM_REGEX = /(?=:\w+\??)|(?<=:\w+\??)(?![\w?])/;

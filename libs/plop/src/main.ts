@@ -1,4 +1,8 @@
 import type { NodePlopAPI } from 'plop';
+import { apiDTOPlugin } from './api/dto/api-dto.plugin';
+import { apiEndpointPlugin } from './api/endpoint/api-endpoint.plugin';
+import { apiResourcePlugin } from './api/resource/api-resource.plugin';
+import { apiServicePlugin } from './api/service/api-service.plugin';
 import { dbTablePlugin } from './db/table/db-table.plugin';
 import { webComponentPlugin } from './web/component/web-component.plugin';
 import { webModalPlugin } from './web/modal/web-modal.plugin';
@@ -7,6 +11,13 @@ import { webPagePlugin } from './web/page/web-page.plugin';
 type Plugins = typeof PLUGINS;
 
 const PLUGINS = {
+  api: {
+    dto: apiDTOPlugin,
+    endpoint: apiEndpointPlugin,
+    resource: apiResourcePlugin,
+    service: apiServicePlugin,
+  },
+
   db: {
     table: dbTablePlugin,
   },
