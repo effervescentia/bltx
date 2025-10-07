@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "feat: add api, db and web generators",
-  "packageName": "@bltx/plop",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}
