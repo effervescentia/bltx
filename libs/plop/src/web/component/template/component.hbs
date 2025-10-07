@@ -1,0 +1,14 @@
+{{#if withStyles}}
+import { {{camelCase name}} } from './{{kebabCase name}}.css';
+
+{{/if}}
+{{#if withProps}}
+export interface {{pascalCase name}}Props{{#if withChildren}} extends React.PropsWithChildren{{/if}} {
+  // TODO: implement me
+}
+
+{{/if}}
+export const {{pascalCase name}}: React.FC{{#if withProps}}<{{pascalCase name}}Props>{{/if}} = ({}) => {
+  // TODO: implement me
+  return null;
+};
