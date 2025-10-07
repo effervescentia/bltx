@@ -1,0 +1,12 @@
+import { type Static, t } from 'elysia';
+
+export type {{pascalCase name}} = Static<typeof {{pascalCase name}}DTO>;
+
+  export const {{pascalCase name}}DTO = t.Object({
+  {{{idFieldsTemplate}}}
+  {{#if withTimestamps}}
+  createdAt: t.Date(),
+  updatedAt: t.Date(),
+  {{/if}}
+  // TODO: implement me
+  });

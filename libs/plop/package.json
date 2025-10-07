@@ -7,7 +7,9 @@
     "src"
   ],
   "dependencies": {
-    "fast-glob": "3.3.3"
+    "change-case": "5.4.4",
+    "fast-glob": "3.3.3",
+    "ts-pattern": "5.8.0"
   },
   "devDependencies": {
     "plop": "4.0.4"

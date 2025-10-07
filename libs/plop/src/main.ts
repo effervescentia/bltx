@@ -1,4 +1,5 @@
 import type { NodePlopAPI } from 'plop';
+import { dbTablePlugin } from './db/table/db-table.plugin';
 import { webComponentPlugin } from './web/component/web-component.plugin';
 import { webModalPlugin } from './web/modal/web-modal.plugin';
 import { webPagePlugin } from './web/page/web-page.plugin';
@@ -6,6 +7,10 @@ import { webPagePlugin } from './web/page/web-page.plugin';
 type Plugins = typeof PLUGINS;
 
 const PLUGINS = {
+  db: {
+    table: dbTablePlugin,
+  },
+
   web: {
     component: webComponentPlugin,
     modal: webModalPlugin,
