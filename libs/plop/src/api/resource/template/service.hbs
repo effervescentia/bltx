@@ -1,0 +1,24 @@
+import { DataService } from '@api/global/data.service';
+{{#if withCRUD}}
+import { insertOne, updateOne } from '@bltx/db';
+import { eq } from 'drizzle-orm';
+import { {{pascalCase name}}DB } from './data/{{kebabCase name}}.db';
+import type { Create{{pascalCase name}} } from './data/create-{{kebabCase name}}.req';
+import type { Patch{{pascalCase name}} } from './data/patch-{{kebabCase name}}.req';
+{{/if}}
+
+export class {{pascalCase name}}Service extends DataService {
+  {{#if withCRUD}}
+  async create(data: Create{{pascalCase name}}) {
+    return insertOne(this.db, {{pascalCase name}}DB, data);
+  }
+
+  async patch({{kebabCase name}}ID: string, data: Patch{{pascalCase name}}) {
+    return updateOne(this.db, {{pascalCase name}}DB, eq({{pascalCase name}}DB.id, {{kebabCase name}}ID), data);
+  }
+
+  async delete({{kebabCase name}}ID: string) {
+    await this.db.delete({{pascalCase name}}DB).where(eq({{pascalCase name}}DB.id, {{kebabCase name}}ID));
+  }
+  {{/if}}
+}
