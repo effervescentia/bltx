@@ -1,14 +1,13 @@
 import type { Treaty } from '@elysiajs/eden';
-import { ELYSIA_FORM_DATA } from 'elysia';
 import { atom, useAtom } from 'jotai';
 import { atomFamily, loadable } from 'jotai/utils';
 import { useEffect } from 'react';
 
 export type ResourceValue<T> =
   | { state: 'loading' }
-  | { state: 'hasRedirect' }
+  | { state: 'notFound' }
   | { state: 'hasError'; error: unknown }
-  | { state: 'hasData'; data: T extends { [ELYSIA_FORM_DATA]: infer Data } ? Data : T };
+  | { state: 'hasData'; data: Extract<Treaty.TreatyResponse<{ 200: T }>, { error: null }>['data'] };
 
 export interface ResourceOptions {
   onNotFound?: () => void;
@@ -28,7 +27,7 @@ export const resource = <T>(fetch: (resourceID: string) => Promise<Treaty.Treaty
     }, [notFound, options?.onNotFound]);
 
     if (notFound) {
-      return { state: 'hasRedirect' } as const;
+      return { state: 'notFound' } as const;
     }
 
     if (value.state === 'hasData') {
@@ -46,7 +45,7 @@ export const resource = <T>(fetch: (resourceID: string) => Promise<Treaty.Treaty
 export const resources = <T>(fetch: () => Promise<Treaty.TreatyResponse<{ 200: T }>>) => {
   const loadableAtom = loadable(atom(fetch));
 
-  return () => {
+  return (): ResourceValue<T> => {
     const [value] = useAtom(loadableAtom);
 
     if (value.state === 'hasData') {
