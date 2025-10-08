@@ -1,6 +1,6 @@
 {
   "name": "@bltx/web",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "main": "build/main.js",
   "types": "build/main.d.ts",
