@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix: build before release",
+  "packageName": "@bltx/web",
+  "email": "ben@voiceflow.com",
+  "dependentChangeType": "patch"
+}
