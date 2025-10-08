@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix: use vite to bundle web lib",
-  "packageName": "@bltx/web",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}

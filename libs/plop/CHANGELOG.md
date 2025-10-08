@@ -1,8 +1,16 @@
 # Change Log - @bltx/plop
 
-<!-- This log was last generated on Tue, 07 Oct 2025 22:26:36 GMT and should not be manually modified. -->
+<!-- This log was last generated on Wed, 08 Oct 2025 05:54:03 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.3.1
+
+Wed, 08 Oct 2025 05:54:03 GMT
+
+### Patches
+
+- docs: update readme (ben@voiceflow.com)
 
 ## 1.3.0
 

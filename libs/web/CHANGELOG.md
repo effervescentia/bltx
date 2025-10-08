@@ -1,8 +1,16 @@
 # Change Log - @bltx/web
 
-<!-- This log was last generated on Tue, 07 Oct 2025 22:26:36 GMT and should not be manually modified. -->
+<!-- This log was last generated on Wed, 08 Oct 2025 05:54:03 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.0.2
+
+Wed, 08 Oct 2025 05:54:03 GMT
+
+### Patches
+
+- fix: use vite to bundle web lib (ben@voiceflow.com)
 
 ## 1.0.1
 
