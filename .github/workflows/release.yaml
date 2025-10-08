@@ -37,6 +37,8 @@ jobs:
           git config user.name "$GH_USER"
           git config user.email "$GH_EMAIL"
           git remote set-url origin "https://$GH_TOKEN@github.com/effervescentia/bltx"
+      - name: Build
+        run: bun run build
       - name: Release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
