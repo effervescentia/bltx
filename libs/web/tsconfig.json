@@ -1,0 +1,11 @@
+{
+  "extends": "@tsconfig/bun",
+  "compilerOptions": {
+    "outDir": "build",
+    "baseUrl": ".",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "noEmit": false
+  },
+  "include": ["src"]
+}
