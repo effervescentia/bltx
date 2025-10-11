@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "refactor: use drizzle type helpers",
+  "packageName": "@bltx/db",
+  "email": "ben@voiceflow.com",
+  "dependentChangeType": "patch"
+}
