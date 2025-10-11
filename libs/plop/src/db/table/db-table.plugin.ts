@@ -1,6 +1,6 @@
 import path from 'node:path';
 
-import { snakeCase } from 'change-case';
+import { kebabCase, snakeCase } from 'change-case';
 import fg from 'fast-glob';
 import type { NodePlopAPI } from 'plop';
 import { match } from 'ts-pattern';
@@ -100,8 +100,9 @@ export const dbTablePlugin = (plop: NodePlopAPI) => {
         })
         .otherwise(() => []);
 
-      if (!modules.includes(name)) {
-        modules.push(name);
+      const moduleName = kebabCase(name);
+      if (!modules.includes(moduleName)) {
+        modules.push(moduleName);
       }
 
       const data = await inquirer.prompt<{ module: string }>([
