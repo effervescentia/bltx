@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix: assert index acces type in crud util",
+  "packageName": "@bltx/db",
+  "email": "ben@voiceflow.com",
+  "dependentChangeType": "patch"
+}
