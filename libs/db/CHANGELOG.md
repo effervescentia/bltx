@@ -1,8 +1,16 @@
 # Change Log - @bltx/db
 
-<!-- This log was last generated on Sat, 11 Oct 2025 06:07:38 GMT and should not be manually modified. -->
+<!-- This log was last generated on Sat, 11 Oct 2025 10:03:22 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.3.2
+
+Sat, 11 Oct 2025 10:03:22 GMT
+
+### Patches
+
+- fix: assert index acces type in crud util (ben@voiceflow.com)
 
 ## 1.3.1
 
