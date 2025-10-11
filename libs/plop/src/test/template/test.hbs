@@ -1,23 +1,23 @@
 {{#unless routesOnly}}
 import { describe, expect, test } from 'bun:test';
+import { MockRequest } from '@bltx/test';
 import { setupIntegrationTest } from '@test/setup.util';
-import { {{pascalCase controllerImport}} } from './{{controllerImport}}';
+import { {{controllerName}} } from './{{controllerImport}}';
 
-describe('{{pascalCase controllerImport}}', () => {
+describe('{{controllerName}}', () => {
 {{/unless}}
   {{#each routes}}
 
   describe('{{constantCase method}} {{path}}', () => {
-    const { app, db } = setupIntegrationTest({{pascalCase ../controllerImport}});
+    const { app, db } = setupIntegrationTest({{../controllerName}});
 
     const request = ({{#if withRequest}}body: unknown{{/if}}): Promise{{#if withResponse}}<unknown>{{/if}} =>
-      app
+      app()
         .handle(
-          new Request('http://localhost{{path}}', {
+          new MockRequest('{{path}}', {
             method: '{{method}}',
             {{#if withRequest}}
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify(body),
+            json: body,
             {{/if}}
           }),
         ){{#if withResponse}}

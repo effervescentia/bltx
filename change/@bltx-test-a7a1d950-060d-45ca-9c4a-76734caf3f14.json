@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "feat: add MockRequest util",
+  "packageName": "@bltx/test",
+  "email": "ben@voiceflow.com",
+  "dependentChangeType": "patch"
+}
