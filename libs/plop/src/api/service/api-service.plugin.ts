@@ -1,7 +1,7 @@
 import path from 'node:path';
 
-import fg from 'fast-glob';
 import type { NodePlopAPI } from 'plop';
+import { getControllerPrompt } from '../../prompts';
 
 export const apiServicePlugin = (plop: NodePlopAPI) => {
   plop.setGenerator('api:service', {
@@ -20,17 +20,8 @@ export const apiServicePlugin = (plop: NodePlopAPI) => {
         },
       ]);
 
-      const controllers = await fg.glob('**/*.controller.ts', {
-        cwd: 'apps/api/src',
-      });
-
-      const { controller } = await inquirer.prompt<{ controller: string }>([
-        {
-          type: 'list',
-          name: 'controller',
-          message: 'inject service into this controller',
-          choices: controllers,
-        },
+      const { controller } = await inquirer.prompt([
+        await getControllerPrompt({ message: 'inject service into this controller' }),
       ]);
 
       const folder = path.dirname(controller);

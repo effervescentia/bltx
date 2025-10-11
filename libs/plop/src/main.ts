@@ -4,6 +4,7 @@ import { apiEndpointPlugin } from './api/endpoint/api-endpoint.plugin';
 import { apiResourcePlugin } from './api/resource/api-resource.plugin';
 import { apiServicePlugin } from './api/service/api-service.plugin';
 import { dbTablePlugin } from './db/table/db-table.plugin';
+import { testControllerPlugin } from './test/test-controller.plugin';
 import { webComponentPlugin } from './web/component/web-component.plugin';
 import { webModalPlugin } from './web/modal/web-modal.plugin';
 import { webPagePlugin } from './web/page/web-page.plugin';
@@ -26,6 +27,10 @@ const PLUGINS = {
     component: webComponentPlugin,
     modal: webModalPlugin,
     page: webPagePlugin,
+  },
+
+  test: {
+    controller: testControllerPlugin,
   },
 };
 

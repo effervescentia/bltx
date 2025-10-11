@@ -1,9 +1,8 @@
 import path from 'node:path';
 
-import { kebabCase } from 'change-case';
-import fg from 'fast-glob';
 import type { NodePlopAPI } from 'plop';
 import { match } from 'ts-pattern';
+import { getModulePrompt } from '../../prompts';
 
 enum DTOType {
   DTO = 'dto',
@@ -15,11 +14,6 @@ export const apiDTOPlugin = (plop: NodePlopAPI) => {
   plop.setGenerator('api:dto', {
     description: 'DTO boilerplate',
     prompts: async (inquirer) => {
-      const modules = await fg.glob('*', {
-        onlyDirectories: true,
-        cwd: 'apps/api/src',
-      });
-
       const { name, type } = await inquirer.prompt<{ name: string; type: DTOType }>([
         {
           type: 'input',
@@ -35,23 +29,12 @@ export const apiDTOPlugin = (plop: NodePlopAPI) => {
         },
       ]);
 
-      const moduleName = kebabCase(name);
-      if (!modules.includes(moduleName)) {
-        modules.push(moduleName);
-      }
-
       const data = await inquirer.prompt<{
         module: string;
         export: boolean;
       }>(
         [
-          {
-            type: 'list',
-            name: 'module',
-            message: 'module name',
-            default: name,
-            choices: modules,
-          },
+          await getModulePrompt({ default: name }),
           type === DTOType.DTO
             ? {
                 type: 'confirm',
@@ -84,7 +67,7 @@ export const apiDTOPlugin = (plop: NodePlopAPI) => {
               path: 'apps/api/src/app/app.interface.ts',
               pattern: /^(export {};\n)?/,
               template:
-                "export type \{ {{pascalCase name}} } from '@api/{{module}}/data/{{kebabCase name}}.{{extension}}';\n",
+                "export type { {{pascalCase name}} } from '@api/{{module}}/data/{{kebabCase name}}.{{extension}}';\n",
             }
           : [],
       ].flat(),

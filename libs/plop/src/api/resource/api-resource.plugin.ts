@@ -77,8 +77,7 @@ export const apiResourcePlugin = (plop: NodePlopAPI) => {
           type: 'modify',
           path: 'apps/api/src/app/app.interface.ts',
           pattern: /^(export {};\n)?/,
-          template:
-            "export type \{ {{pascalCase name}} } from '@api/{{kebabCase name}}/data/{{kebabCase name}}.dto';\n",
+          template: "export type { {{pascalCase name}} } from '@api/{{kebabCase name}}/data/{{kebabCase name}}.dto';\n",
         },
         {
           type: 'modify',
