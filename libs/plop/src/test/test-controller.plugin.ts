@@ -6,7 +6,9 @@ import type { NodePlopAPI } from 'plop';
 import { ALLOW_REQUEST_METHODS, ALLOW_RESPONSE_METHODS, API_SOURCE_DIRECTORY, HTTP_METHODS } from '../constants';
 import { getControllerPrompt } from '../prompts';
 
-const METHOD_PATTERN = RegExp(`\\.(?<method>${HTTP_METHODS.join('|')})\\(\\s*'(?<path>/[^']*)'`, 'g');
+const CONTROLLER_PATTERN =
+  /export const (?<controllerName>\w+Controller) = new Elysia\((?:{\s*prefix: '(?<controllerPath>[^']*))?'/;
+const ROUTE_PATTERN = RegExp(`\\.(?<method>${HTTP_METHODS.join('|')})\\(\\s*'(?<path>/[^']*)'`, 'g');
 const TEST_PATTERN = /describe\('(?<method>[A-Z]+) (?<path>\/[^']*)'/g;
 
 interface ControllerRoute {
@@ -47,6 +49,8 @@ const handleExistingTest = async (inquirer: typeof Inquirer, testFile: string, r
   return { operationType: 'add', routes };
 };
 
+const normalizePath = (path: string) => (path === '/' ? '' : path);
+
 export const testControllerPlugin = (plop: NodePlopAPI) => {
   plop.setGenerator('test:controller', {
     description: 'controller test boilerplate',
@@ -55,23 +59,36 @@ export const testControllerPlugin = (plop: NodePlopAPI) => {
 
       const controllerSource = await fs.readFile(path.join(API_SOURCE_DIRECTORY, controller), 'utf-8');
       const controllerImport = path.basename(controller).slice(0, -path.extname(controller).length);
-      const matches = controllerSource.matchAll(METHOD_PATTERN);
+
+      const controllerMatch = controllerSource.match(CONTROLLER_PATTERN);
+      if (!controllerMatch) throw new Error(`Failed to find an elysia controller in ${controller}`);
+
+      const { controllerName, controllerPath } = controllerMatch.groups as {
+        controllerName: string;
+        controllerPath?: string;
+      };
+      const routeMatches = controllerSource.matchAll(ROUTE_PATTERN);
 
       const controllerTest = path.join(path.dirname(controller), `${controllerImport}.test.ts`);
 
-      const controllerRoutes = Array.from(matches).flatMap<ControllerRoute>(({ groups }) =>
-        groups
+      const controllerRoutes = Array.from(routeMatches).flatMap<ControllerRoute>(({ groups }) => {
+        if (!groups) return [];
+        const { method, path } = groups as Pick<ControllerRoute, 'method' | 'path'>;
+
+        return groups
           ? {
-              ...(groups as Pick<ControllerRoute, 'method' | 'path'>),
-              withRequest: ALLOW_REQUEST_METHODS.includes(groups.method),
-              withResponse: ALLOW_RESPONSE_METHODS.includes(groups.method),
+              method,
+              path: controllerPath ? `${normalizePath(controllerPath)}${normalizePath(path)}` || '/' : path,
+              withRequest: ALLOW_REQUEST_METHODS.includes(method),
+              withResponse: ALLOW_RESPONSE_METHODS.includes(method),
             }
-          : [],
-      );
+          : [];
+      });
 
       const { operationType, routes } = await handleExistingTest(inquirer, controllerTest, controllerRoutes);
 
       return {
+        controllerName,
         controllerImport,
         controllerTest,
         operationType,
