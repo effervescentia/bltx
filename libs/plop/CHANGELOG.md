@@ -1,8 +1,16 @@
 # Change Log - @bltx/plop
 
-<!-- This log was last generated on Sat, 11 Oct 2025 21:40:17 GMT and should not be manually modified. -->
+<!-- This log was last generated on Sat, 11 Oct 2025 22:54:35 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.4.1
+
+Sat, 11 Oct 2025 22:54:35 GMT
+
+### Patches
+
+- fix: working controller test generator (ben@voiceflow.com)
 
 ## 1.4.0
 
