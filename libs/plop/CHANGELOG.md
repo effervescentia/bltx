@@ -1,8 +1,16 @@
 # Change Log - @bltx/plop
 
-<!-- This log was last generated on Wed, 08 Oct 2025 05:54:03 GMT and should not be manually modified. -->
+<!-- This log was last generated on Sat, 11 Oct 2025 05:09:21 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.3.2
+
+Sat, 11 Oct 2025 05:09:21 GMT
+
+### Patches
+
+- fix: kebab case dynamic module in plop (ben@voiceflow.com)
 
 ## 1.3.1
 
