@@ -20,5 +20,5 @@ export const updateOne = async <Schema extends AnyRecord, Table extends PgTable>
 ) => {
   const results = (await db.update(table).set(values).where(where).returning()) as InferSelectModel<Table>[];
   if (!results.length) throw new Error(`Failed to update row from ${table._.name} table`);
-  return results[0];
+  return results[0] as InferSelectModel<Table>;
 };
