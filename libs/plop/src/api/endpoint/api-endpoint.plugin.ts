@@ -1,8 +1,8 @@
 import path from 'node:path';
 
-import fg from 'fast-glob';
 import type { NodePlopAPI } from 'plop';
-import { PARAM_REGEX } from '../../constants';
+import { ALLOW_REQUEST_METHODS, ALLOW_RESPONSE_METHODS, HTTP_METHODS, PARAM_REGEX } from '../../constants';
+import { getControllerPrompt } from '../../prompts';
 
 const STRING_TYPE = 't.String()';
 
@@ -10,10 +10,6 @@ export const apiEndpointPlugin = (plop: NodePlopAPI) => {
   plop.setGenerator('api:endpoint', {
     description: 'API endpoint boilerplate',
     prompts: async (inquirer) => {
-      const controllers = await fg.glob('**/*.controller.ts', {
-        cwd: 'apps/api/src',
-      });
-
       const data = await inquirer.prompt<{
         controller: string;
         method: string;
@@ -24,17 +20,12 @@ export const apiEndpointPlugin = (plop: NodePlopAPI) => {
         responseName?: string;
         withQuery: boolean;
       }>([
-        {
-          type: 'list',
-          name: 'controller',
-          message: 'inject service into this controller',
-          choices: controllers,
-        },
+        await getControllerPrompt({ message: 'add endpoint to this controller' }),
         {
           type: 'list',
           name: 'method',
           message: 'http method',
-          choices: ['get', 'put', 'post', 'head', 'patch', 'trace', 'delete', 'connect', 'options'],
+          choices: HTTP_METHODS,
         },
         {
           type: 'input',
@@ -47,7 +38,7 @@ export const apiEndpointPlugin = (plop: NodePlopAPI) => {
           name: 'withRequest',
           message: 'include request DTO',
           default: false,
-          when: ({ method }) => ['put', 'post', 'patch', 'delete', 'options'].includes(method),
+          when: ({ method }) => ALLOW_REQUEST_METHODS.includes(method),
         },
         {
           type: 'input',
@@ -60,7 +51,7 @@ export const apiEndpointPlugin = (plop: NodePlopAPI) => {
           name: 'withResponse',
           message: 'include response DTO',
           default: false,
-          when: ({ method }) => ['get', 'put', 'post', 'patch', 'trace', 'delete', 'options'].includes(method),
+          when: ({ method }) => ALLOW_RESPONSE_METHODS.includes(method),
         },
         {
           type: 'input',

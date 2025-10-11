@@ -1,0 +1,43 @@
+{{#unless routesOnly}}
+import { describe, expect, test } from 'bun:test';
+import { setupIntegrationTest } from '@test/setup.util';
+import { {{pascalCase controllerImport}} } from './{{controllerImport}}';
+
+describe('{{pascalCase controllerImport}}', () => {
+{{/unless}}
+  {{#each routes}}
+
+  describe('{{constantCase method}} {{path}}', () => {
+    const { app, db } = setupIntegrationTest({{pascalCase ../controllerImport}});
+
+    const request = ({{#if withRequest}}body: unknown{{/if}}): Promise{{#if withResponse}}<unknown>{{/if}} =>
+      app
+        .handle(
+          new Request('http://localhost{{path}}', {
+            method: '{{method}}',
+            {{#if withRequest}}
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(body),
+            {{/if}}
+          }),
+        ){{#if withResponse}}
+        .then((res) => res.json()){{/if}};
+
+    test('example', async () => {
+      {{#if withResponse}}
+      const result = await request({{#if withRequest}}null{{/if}});
+
+      expect(result).toEqual({
+        // TODO: implement me
+      });
+      {{else}}
+      await request({{#if withRequest}}null{{/if}});
+
+      // TODO: implement me
+      {{/if}}
+    });
+  });
+  {{/each}}
+{{#unless routesOnly}}
+});
+{{/unless}}

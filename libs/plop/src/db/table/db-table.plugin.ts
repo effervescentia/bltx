@@ -1,9 +1,9 @@
 import path from 'node:path';
 
-import { kebabCase, snakeCase } from 'change-case';
-import fg from 'fast-glob';
+import { snakeCase } from 'change-case';
 import type { NodePlopAPI } from 'plop';
 import { match } from 'ts-pattern';
+import { getModulePrompt } from '../../prompts';
 
 enum IDColumnType {
   UUID = 'uuid',
@@ -14,11 +14,6 @@ export const dbTablePlugin = (plop: NodePlopAPI) => {
   plop.setGenerator('db:table', {
     description: 'database table boilerplate',
     prompts: async (inquirer) => {
-      const modules = await fg.glob('*', {
-        onlyDirectories: true,
-        cwd: 'apps/api/src',
-      });
-
       const { name, withRelations, withDTO, withID, idColumnType, isCompositeID, withTimestamps } =
         await inquirer.prompt<{
           name: string;
@@ -100,20 +95,7 @@ export const dbTablePlugin = (plop: NodePlopAPI) => {
         })
         .otherwise(() => []);
 
-      const moduleName = kebabCase(name);
-      if (!modules.includes(moduleName)) {
-        modules.push(moduleName);
-      }
-
-      const data = await inquirer.prompt<{ module: string }>([
-        {
-          type: 'list',
-          name: 'module',
-          message: 'module name',
-          default: name,
-          choices: modules,
-        },
-      ]);
+      const data = await inquirer.prompt([await getModulePrompt({ default: name })]);
 
       const columnTemplate = match({ idColumnType, isCompositeID })
         .with({ idColumnType: IDColumnType.UUID, isCompositeID: false }, () => (name: string) => `id('${name}')`)
