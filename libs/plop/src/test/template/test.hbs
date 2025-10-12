@@ -11,7 +11,7 @@ describe('{{controllerName}}', () => {
   describe('{{constantCase method}} {{path}}', () => {
     const { app, db } = setupIntegrationTest({{../controllerName}});
 
-    const request = ({{#if withRequest}}body: unknown{{/if}}): Promise{{#if withResponse}}<unknown>{{/if}} =>
+    const request = ({{#if withRequest}}body: unknown{{/if}}){{#if withResponse}}: Promise<unknown>{{/if}} =>
       app()
         .handle(
           new MockRequest('{{path}}', {
