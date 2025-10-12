@@ -1,4 +1,5 @@
 import Elysia, { type Static, type TSchema } from 'elysia';
+import { TypeCompiler } from 'elysia/type-system';
 import envSchema from 'env-schema';
 
 export const createEnvironmentPlugin = <Schema extends TSchema>(schema: Schema) =>
@@ -8,5 +9,7 @@ export const createEnvironmentPlugin = <Schema extends TSchema>(schema: Schema) 
       dotenv: import.meta.env.NODE_ENV === 'development',
     });
 
-    return app.decorate({ env });
+    const decoded = TypeCompiler.Compile(schema).Decode(env);
+
+    return app.decorate({ env: decoded });
   });
