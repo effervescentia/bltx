@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix: do not append Promise return type",
-  "packageName": "@bltx/plop",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}

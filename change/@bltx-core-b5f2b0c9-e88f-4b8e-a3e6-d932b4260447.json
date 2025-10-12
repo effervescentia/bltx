@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix: decode env variable values using schema",
-  "packageName": "@bltx/core",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}

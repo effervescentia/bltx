@@ -1,8 +1,16 @@
 # Change Log - @bltx/plop
 
-<!-- This log was last generated on Sat, 11 Oct 2025 22:54:35 GMT and should not be manually modified. -->
+<!-- This log was last generated on Sun, 12 Oct 2025 01:51:35 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.4.2
+
+Sun, 12 Oct 2025 01:51:35 GMT
+
+### Patches
+
+- fix: do not append Promise return type (ben@voiceflow.com)
 
 ## 1.4.1
 

@@ -1,8 +1,16 @@
 # Change Log - @bltx/core
 
-<!-- This log was last generated on Fri, 03 Oct 2025 18:15:32 GMT and should not be manually modified. -->
+<!-- This log was last generated on Sun, 12 Oct 2025 01:51:35 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.1.1
+
+Sun, 12 Oct 2025 01:51:35 GMT
+
+### Patches
+
+- fix: decode env variable values using schema (ben@voiceflow.com)
 
 ## 1.1.0
 
