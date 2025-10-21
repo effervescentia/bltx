@@ -1,8 +1,16 @@
 # Change Log - @bltx/test
 
-<!-- This log was last generated on Tue, 21 Oct 2025 07:10:46 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 21 Oct 2025 16:35:09 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.4.1
+
+Tue, 21 Oct 2025 16:35:09 GMT
+
+### Patches
+
+- fix: pass plugins without callback (ben@voiceflow.com)
 
 ## 1.4.0
 

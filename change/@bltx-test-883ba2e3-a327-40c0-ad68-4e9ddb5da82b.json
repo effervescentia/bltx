@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix: pass plugins without callback",
-  "packageName": "@bltx/test",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}
