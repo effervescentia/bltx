@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "refactor: db plugin organization",
-  "packageName": "@bltx/db",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}

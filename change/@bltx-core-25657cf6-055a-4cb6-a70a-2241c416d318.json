@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "feat: support test plugins",
-  "packageName": "@bltx/core",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}
