@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix: use correct plugin types in all modes",
-  "packageName": "@bltx/core",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}
