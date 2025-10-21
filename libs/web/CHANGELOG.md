@@ -1,8 +1,16 @@
 # Change Log - @bltx/web
 
-<!-- This log was last generated on Tue, 21 Oct 2025 06:18:28 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 21 Oct 2025 06:23:56 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.1.2
+
+Tue, 21 Oct 2025 06:23:56 GMT
+
+### Patches
+
+- fix: export correct web styles (ben@voiceflow.com)
 
 ## 1.1.1
 
