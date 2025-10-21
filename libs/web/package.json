@@ -6,7 +6,7 @@
   "types": "build/main.d.ts",
   "exports": {
     ".": "./build/main.js",
-    "./styles.css": "./build/main.css"
+    "./styles.css": "./build/styles.css"
   },
   "files": [
     "build"
