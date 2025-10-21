@@ -4,14 +4,14 @@ import { generateDrizzleJson, generateMigration } from 'drizzle-kit/api';
 import { drizzle } from 'drizzle-orm/pglite';
 import Elysia from 'elysia';
 import fs from 'fs/promises';
-import { createDatabaseClient } from '../db.plugin';
-import type { Database } from '../db.types';
+import { createPGliteDatabaseClient } from '../db.plugin';
+import type { DatabaseLike } from '../db.types';
 
 const tempDir = () => `/tmp/bltx-db-seed-${Bun.randomUUIDv7()}.db`;
 
 const dumpSeedData = async <Schema extends AnyRecord>(schema: Schema) => {
   const dbDir = tempDir();
-  const client = createDatabaseClient({ dataDir: dbDir });
+  const client = createPGliteDatabaseClient({ dataDir: dbDir });
 
   const db = drizzle({ client, schema });
 
@@ -43,7 +43,7 @@ export const TestDatabasePluginFactory = <Schema extends AnyRecord>(schema: Sche
       seedData = await dumpSeedData(schema);
     }
 
-    const client = createDatabaseClient({
+    const client = createPGliteDatabaseClient({
       dataDir: tempDir(),
       loadDataDir: seedData,
     });
@@ -51,7 +51,7 @@ export const TestDatabasePluginFactory = <Schema extends AnyRecord>(schema: Sche
   };
 
   return () => {
-    let db: Database<Schema> & { $client: PGlite };
+    let db: DatabaseLike<Schema> & { $client: PGlite };
 
     return new Elysia({ name: 'plugin.database' })
       .use((app) => app.decorate({ db: () => db }))

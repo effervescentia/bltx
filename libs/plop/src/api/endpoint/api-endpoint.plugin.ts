@@ -101,7 +101,7 @@ export const apiEndpointPlugin = (plop: NodePlopAPI) => {
           pattern: /(?=;\s*$)/,
           templateFile: path.join(__dirname, 'template/controller.hbs'),
         },
-        data?.withParams || data?.withQuery
+        data?.['withParams'] || data?.['withQuery']
           ? [
               {
                 type: 'modify',
@@ -123,14 +123,14 @@ export const apiEndpointPlugin = (plop: NodePlopAPI) => {
               },
             ]
           : [],
-        data?.withRequest
+        data?.['withRequest']
           ? [
               {
                 type: 'add',
-                path: `apps/api/src/${path.dirname(data?.controller)}/data/{{kebabCase requestName}}.req.ts`,
+                path: `apps/api/src/${path.dirname(data?.['controller'])}/data/{{kebabCase requestName}}.req.ts`,
                 templateFile: path.join(__dirname, 'template/dto.hbs'),
                 data: {
-                  name: data?.requestName,
+                  name: data?.['requestName'],
                   suffix: 'Request',
                 },
               },
@@ -142,14 +142,14 @@ export const apiEndpointPlugin = (plop: NodePlopAPI) => {
               },
             ]
           : [],
-        data?.withResponse
+        data?.['withResponse']
           ? [
               {
                 type: 'add',
-                path: `apps/api/src/${path.dirname(data?.controller)}/data/{{kebabCase responseName}}.res.ts`,
+                path: `apps/api/src/${path.dirname(data?.['controller'])}/data/{{kebabCase responseName}}.res.ts`,
                 templateFile: path.join(__dirname, 'template/dto.hbs'),
                 data: {
-                  name: data?.responseName,
+                  name: data?.['responseName'],
                   suffix: 'Response',
                 },
               },

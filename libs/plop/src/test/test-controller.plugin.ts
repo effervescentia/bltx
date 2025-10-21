@@ -96,7 +96,7 @@ export const testControllerPlugin = (plop: NodePlopAPI) => {
       };
     },
     actions: (data) => [
-      data?.operationType === 'merge'
+      data?.['operationType'] === 'merge'
         ? {
             type: 'modify',
             path: 'apps/api/src/{{controllerTest}}',

@@ -161,7 +161,7 @@ export const dbTablePlugin = (plop: NodePlopAPI) => {
           pattern: /^(export {};\n)?/,
           template: "export * from '@api/{{module}}/data/{{kebabCase name}}.db';\n",
         },
-        data?.withDTO
+        data?.['withDTO']
           ? [
               {
                 type: 'add',

@@ -43,10 +43,16 @@ export const apiServicePlugin = (plop: NodePlopAPI) => {
       {
         type: 'append',
         path: 'apps/api/src/{{controller}}',
-        pattern: data?.withDatabase ? '.use(DatabasePlugin)' : /Elysia.+}\)/g,
-        template: data?.withDatabase
-          ? "  .derive({ as: 'scoped' }, ({ db }) => ({ {{camelCase name}}: new {{pascalCase name}}Service(db()) }))"
-          : '  .decorate({ {{camelCase name}}: new {{pascalCase name}}Service() })',
+        ...(data?.['withDatabase']
+          ? {
+              pattern: '.use(DatabasePlugin)',
+              template:
+                "  .derive({ as: 'scoped' }, ({ db }) => ({ {{camelCase name}}: new {{pascalCase name}}Service(db()) }))",
+            }
+          : {
+              pattern: /Elysia.+}\)/g,
+              template: '  .decorate({ {{camelCase name}}: new {{pascalCase name}}Service() })',
+            }),
       },
     ],
   });

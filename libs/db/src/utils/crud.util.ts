@@ -1,10 +1,10 @@
 import type { AnyRecord } from '@bltx/core';
 import type { InferInsertModel, InferSelectModel, SQL } from 'drizzle-orm';
 import type { PgTable } from 'drizzle-orm/pg-core';
-import type { Database } from '../db.types';
+import type { DatabaseLike } from '../db.types';
 
 export const insertOne = async <Schema extends AnyRecord, Table extends PgTable>(
-  db: Database<Schema>,
+  db: DatabaseLike<Schema>,
   table: Table,
   values: InferInsertModel<Table>,
 ) => {
@@ -13,7 +13,7 @@ export const insertOne = async <Schema extends AnyRecord, Table extends PgTable>
 };
 
 export const updateOne = async <Schema extends AnyRecord, Table extends PgTable>(
-  db: Database<Schema>,
+  db: DatabaseLike<Schema>,
   table: Table,
   where: SQL,
   values: Partial<InferInsertModel<Table>>,

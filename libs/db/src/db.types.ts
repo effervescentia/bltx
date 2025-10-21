@@ -11,9 +11,16 @@ import type {
 } from 'drizzle-orm/pg-core';
 import type { Merge } from 'type-fest';
 
-export type Database<Schema extends AnyRecord> =
-  | PgDatabase<PgQueryResultHKT, Schema, ExtractTablesWithRelations<Schema>>
-  | Transaction<Schema>;
+export type DatabaseLike<Schema extends AnyRecord> = Merge<
+  Database<Schema> | Transaction<Schema>,
+  { query: Database<Schema>['query'] }
+>;
+
+export type Database<Schema extends AnyRecord> = PgDatabase<
+  PgQueryResultHKT,
+  Schema,
+  ExtractTablesWithRelations<Schema>
+>;
 
 export type AnyDatabase = Database<any>;
 
