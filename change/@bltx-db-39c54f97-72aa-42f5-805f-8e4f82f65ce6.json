@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix: correct generic db type",
+  "packageName": "@bltx/db",
+  "email": "ben@voiceflow.com",
+  "dependentChangeType": "patch"
+}
