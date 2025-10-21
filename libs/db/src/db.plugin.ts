@@ -7,19 +7,21 @@ import { vector } from '@electric-sql/pglite/vector';
 import type { SQL } from 'bun';
 import { drizzle as drizzleBunSQL } from 'drizzle-orm/bun-sql';
 import { drizzle as drizzlePGlite } from 'drizzle-orm/pglite';
-import Elysia from 'elysia';
+import Elysia, { type SingletonBase } from 'elysia';
 import { match } from 'ts-pattern';
 
-export type DatabaseOptions<Schema> =
+export type DatabaseOptions<Schema, Env> =
   | {
       type: 'bun-sql';
       schema: Schema;
-      client: SQL;
+      env: Elysia<any, SingletonBase & { decorator: { env: Env } }, any, any, any, any, any>;
+      factory: (env: Env) => SQL;
     }
   | {
       type: 'pglite';
       schema: Schema;
-      client: PGlite;
+      env: Elysia<any, SingletonBase & { decorator: { env: Env } }, any, any, any, any, any>;
+      factory: (env: Env) => PGlite;
     };
 
 export const createPGliteDatabaseClient = (options?: PGliteOptions) =>
@@ -28,11 +30,13 @@ export const createPGliteDatabaseClient = (options?: PGliteOptions) =>
     ...options,
   });
 
-export const createDatabasePlugin = <Schema extends AnyRecord>(options: DatabaseOptions<Schema>) =>
-  new Elysia({ name: 'plugin.database' }).use((app) => {
+export const createDatabasePlugin = <Schema extends AnyRecord, Env extends AnyRecord>(
+  options: DatabaseOptions<Schema, Env>,
+) =>
+  new Elysia({ name: 'plugin.database' }).use(options.env).use((app) => {
     const db = match(options)
-      .with({ type: 'bun-sql' }, ({ schema, client }) => drizzleBunSQL({ schema, client }))
-      .with({ type: 'pglite' }, ({ schema, client }) => drizzlePGlite({ schema, client }))
+      .with({ type: 'bun-sql' }, ({ schema, factory }) => drizzleBunSQL({ schema, client: factory(app.decorator.env) }))
+      .with({ type: 'pglite' }, ({ schema, factory }) => drizzlePGlite({ schema, client: factory(app.decorator.env) }))
       .exhaustive();
 
     return app.decorate({ db: () => db });
