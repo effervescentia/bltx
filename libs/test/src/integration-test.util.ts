@@ -31,10 +31,7 @@ export const integrationTestFactory = <Schema extends AnyRecord, Env extends Any
     };
 
     beforeAll(async () => {
-      app = new Elysia()
-        .use(() => dbPlugin)
-        .use(() => envPlugin)
-        .use(controller);
+      app = new Elysia().use(dbPlugin).use(envPlugin).use(controller);
       await app.modules;
     });
 

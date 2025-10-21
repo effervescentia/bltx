@@ -5,6 +5,10 @@ import { ENVIRONMENT_PLUGIN } from '../core.const';
 
 export const createEnvironmentPlugin = <Schema extends TSchema>(schema: Schema) =>
   new Elysia({ name: ENVIRONMENT_PLUGIN }).use((app) => {
+    if (import.meta.env.NODE_ENV === 'test') {
+      return app.decorate({ env: () => null as Static<Schema> });
+    }
+
     const env = envSchema<Static<Schema>>({
       schema,
       dotenv: import.meta.env.NODE_ENV === 'development',
@@ -12,5 +16,5 @@ export const createEnvironmentPlugin = <Schema extends TSchema>(schema: Schema) 
 
     const decoded = TypeCompiler.Compile(schema).Decode(env);
 
-    return app.decorate({ env: decoded });
+    return app.decorate({ env: () => decoded });
   });

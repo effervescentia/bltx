@@ -8,20 +8,32 @@ import type { SQL } from 'bun';
 import { drizzle as drizzleBunSQL } from 'drizzle-orm/bun-sql';
 import { drizzle as drizzlePGlite } from 'drizzle-orm/pglite';
 import Elysia, { type SingletonBase } from 'elysia';
+
 import { match } from 'ts-pattern';
 import { DATABASE_PLUGIN } from './db.const';
+import type { DatabaseLike } from './db.types';
+
+type EnvironmentPluginInstance<Env> = Elysia<
+  any,
+  SingletonBase & { decorator: { env: () => Env } },
+  any,
+  any,
+  any,
+  any,
+  any
+>;
 
 export type DatabaseOptions<Schema, Env> =
   | {
       type: 'bun-sql';
       schema: Schema;
-      env: Elysia<any, SingletonBase & { decorator: { env: Env } }, any, any, any, any, any>;
+      env: EnvironmentPluginInstance<Env>;
       factory: (env: Env) => SQL;
     }
   | {
       type: 'pglite';
       schema: Schema;
-      env: Elysia<any, SingletonBase & { decorator: { env: Env } }, any, any, any, any, any>;
+      env: EnvironmentPluginInstance<Env>;
       factory: (env: Env) => PGlite;
     };
 
@@ -35,9 +47,17 @@ export const createDatabasePlugin = <Schema extends AnyRecord, Env extends AnyRe
   options: DatabaseOptions<Schema, Env>,
 ) =>
   new Elysia({ name: DATABASE_PLUGIN }).use(options.env).use((app) => {
+    if (import.meta.env.NODE_ENV === 'test') {
+      return app.decorate({ db: () => null! as DatabaseLike<any> });
+    }
+
     const db = match(options)
-      .with({ type: 'bun-sql' }, ({ schema, factory }) => drizzleBunSQL({ schema, client: factory(app.decorator.env) }))
-      .with({ type: 'pglite' }, ({ schema, factory }) => drizzlePGlite({ schema, client: factory(app.decorator.env) }))
+      .with({ type: 'bun-sql' }, ({ schema, factory }) =>
+        drizzleBunSQL({ schema, client: factory(app.decorator.env()) }),
+      )
+      .with({ type: 'pglite' }, ({ schema, factory }) =>
+        drizzlePGlite({ schema, client: factory(app.decorator.env()) }),
+      )
       .exhaustive();
 
     return app.decorate({ db: () => db });
