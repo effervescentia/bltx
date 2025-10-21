@@ -6,6 +6,9 @@
   "files": [
     "src"
   ],
+  "scripts": {
+    "check:types": "tsc --noEmit"
+  },
   "dependencies": {
     "env-schema": "6.0.1",
     "logixlysia": "5.1.0"

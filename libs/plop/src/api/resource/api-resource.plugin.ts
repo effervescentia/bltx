@@ -46,14 +46,14 @@ export const apiResourcePlugin = (plop: NodePlopAPI) => {
           path: 'apps/api/src/{{kebabCase name}}/data/{{kebabCase name}}.dto.ts',
           templateFile: path.join(__dirname, 'template/dto.hbs'),
         },
-        data?.withService
+        data?.['withService']
           ? {
               type: 'add',
               path: 'apps/api/src/{{kebabCase name}}/{{kebabCase name}}.service.ts',
               templateFile: path.join(__dirname, 'template/service.hbs'),
             }
           : [],
-        data?.withCRUD
+        data?.['withCRUD']
           ? [
               {
                 type: 'add',

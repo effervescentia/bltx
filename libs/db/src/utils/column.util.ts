@@ -1,7 +1,7 @@
-import { Value } from '@sinclair/typebox/value';
 import { sql } from 'drizzle-orm';
 import { customType, pgEnum, timestamp, varchar } from 'drizzle-orm/pg-core';
 import type { Static, TSchema } from 'elysia';
+import { TypeCompiler } from 'elysia/type-system';
 
 export const uuidV7 = (name: string) => varchar(name, { length: 36 });
 
@@ -31,11 +31,13 @@ export const typedJSONB =
       },
       ...(deserialize && {
         fromDriver(value: Static<Schema>) {
-          if (!Value.Check(schema, value)) {
+          const compiler = TypeCompiler.Compile(schema);
+
+          if (!compiler.Check(value)) {
             throw new Error(`Failed to deserialize database column ${name} from value:\n${value}`);
           }
 
-          return Value.Clean(schema, value);
+          return compiler.Encode(value);
         },
       }),
     })(name);

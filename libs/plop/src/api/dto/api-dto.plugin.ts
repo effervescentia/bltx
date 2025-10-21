@@ -61,7 +61,7 @@ export const apiDTOPlugin = (plop: NodePlopAPI) => {
           path: 'apps/api/src/{{module}}/data/{{kebabCase name}}.{{extension}}.ts',
           templateFile: path.join(__dirname, 'template/dto.hbs'),
         },
-        data?.export
+        data?.['export']
           ? {
               type: 'modify',
               path: 'apps/api/src/app/app.interface.ts',

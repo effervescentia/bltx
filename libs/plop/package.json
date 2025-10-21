@@ -6,12 +6,16 @@
   "files": [
     "src"
   ],
+  "scripts": {
+    "check:types": "tsc --noEmit"
+  },
   "dependencies": {
     "change-case": "5.4.4",
     "fast-glob": "3.3.3",
     "ts-pattern": "5.8.0"
   },
   "devDependencies": {
+    "@types/inquirer": "9.0.9",
     "plop": "4.0.4"
   },
   "peerDependencies": {

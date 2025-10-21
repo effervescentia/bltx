@@ -10,12 +10,17 @@
   "files": [
     "src"
   ],
+  "scripts": {
+    "check:types": "tsc --noEmit"
+  },
   "dependencies": {
     "ts-pattern": "5.8.0",
     "type-fest": "4.41.0"
   },
   "devDependencies": {
+    "@bltx/core": "workspace:*",
     "@electric-sql/pglite": "0.3.5",
+    "drizzle-kit": "0.31.4",
     "drizzle-orm": "0.44.3",
     "elysia": "1.3.6"
   },
@@ -28,6 +33,9 @@
   },
   "peerDependenciesMeta": {
     "drizzle-kit": {
+      "optional": true
+    },
+    "@electric-sql/pglite": {
       "optional": true
     }
   }

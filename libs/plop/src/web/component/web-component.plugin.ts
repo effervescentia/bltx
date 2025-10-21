@@ -53,7 +53,7 @@ export const webComponentPlugin = (plop: NodePlopAPI) => {
     },
     actions: (data) =>
       [
-        data?.withStyles
+        data?.['withStyles']
           ? {
               type: 'add',
               path: 'apps/web/src/components/{{kebabCase name}}/{{kebabCase name}}.css.ts',

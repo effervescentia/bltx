@@ -1,7 +1,7 @@
 import { afterAll, beforeAll } from 'bun:test';
 import type { AnyRecord } from '@bltx/core';
 import { TestDatabasePluginFactory } from '@bltx/db/test';
-import { type ExtractTablesWithRelations, sql } from 'drizzle-orm';
+import { sql } from 'drizzle-orm';
 import Elysia, { type AnyElysia } from 'elysia';
 import fs from 'fs/promises';
 
@@ -19,8 +19,8 @@ export const integrationTestFactory = <Schema extends AnyRecord>(schema: Schema)
 
     const truncate = async () => {
       await dbPlugin.decorator.db().transaction(async (tx) => {
-        for (const table of Object.values((tx._.schema as ExtractTablesWithRelations<AnyRecord>) ?? {})) {
-          await tx.execute(sql`TRUNCATE TABLE ${sql.identifier(table.dbName)} CASCADE`);
+        for (const table of Object.values(tx._.schema ?? {})) {
+          await tx.execute(sql`TRUNCATE TABLE ${sql.identifier((table as { dbName: string }).dbName)} CASCADE`);
         }
       });
     };

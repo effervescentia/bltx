@@ -82,7 +82,7 @@ export const webPagePlugin = (plop: NodePlopAPI) => {
         type: 'append',
         path: 'apps/web/src/app/app.router.ts',
         pattern: /(?=}\);\s*$)/,
-        template: data?.routeTemplate ?? `  {{camelCase name}}: defineRoute('{{route}}'),\n`,
+        template: data?.['routeTemplate'] ?? `  {{camelCase name}}: defineRoute('{{route}}'),\n`,
       },
       {
         type: 'modify',
@@ -95,7 +95,7 @@ export const webPagePlugin = (plop: NodePlopAPI) => {
         path: 'apps/web/src/app/app.component.tsx',
         pattern: /(?=\.otherwise\()/,
         template:
-          data?.renderTemplate ?? `    .with({ name: '{{camelCase name}}' }, () => <{{pascalCase name}} />)\n\n`,
+          data?.['renderTemplate'] ?? `    .with({ name: '{{camelCase name}}' }, () => <{{pascalCase name}} />)\n\n`,
       },
       {
         type: 'modify',
@@ -110,7 +110,7 @@ export const webPagePlugin = (plop: NodePlopAPI) => {
           const imports = match[0];
 
           const isMultiline = imports.includes('\n');
-          const requiredImports = ['defineRoute', data?.routeTemplate ? 'param' : []].flat();
+          const requiredImports = ['defineRoute', data?.['routeTemplate'] ? 'param' : []].flat();
           const missingImports = requiredImports.filter((name) => !imports.match(RegExp(`\\b${name}\\b`)));
 
           if (!missingImports.length) return text;
