@@ -1,9 +1,10 @@
+import fs from 'node:fs/promises';
 import type { AnyRecord } from '@bltx/core';
 import type { PGlite } from '@electric-sql/pglite';
 import { generateDrizzleJson, generateMigration } from 'drizzle-kit/api';
 import { drizzle } from 'drizzle-orm/pglite';
 import Elysia from 'elysia';
-import fs from 'fs/promises';
+import { DATABASE_PLUGIN } from '../db.const';
 import { createPGliteDatabaseClient } from '../db.plugin';
 import type { DatabaseLike } from '../db.types';
 
@@ -39,9 +40,7 @@ export const TestDatabasePluginFactory = <Schema extends AnyRecord>(schema: Sche
   let seedData: File | Blob | null = null;
 
   const initDB = async () => {
-    if (!seedData) {
-      seedData = await dumpSeedData(schema);
-    }
+    seedData ??= await dumpSeedData(schema);
 
     const client = createPGliteDatabaseClient({
       dataDir: tempDir(),
@@ -53,7 +52,7 @@ export const TestDatabasePluginFactory = <Schema extends AnyRecord>(schema: Sche
   return () => {
     let db: DatabaseLike<Schema> & { $client: PGlite };
 
-    return new Elysia({ name: 'plugin.database' })
+    return new Elysia({ name: DATABASE_PLUGIN })
       .use((app) => app.decorate({ db: () => db }))
       .use(async (app) => {
         db = await initDB();

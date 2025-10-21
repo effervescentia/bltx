@@ -1,9 +1,10 @@
 import Elysia, { type Static, type TSchema } from 'elysia';
 import { TypeCompiler } from 'elysia/type-system';
 import envSchema from 'env-schema';
+import { ENVIRONMENT_PLUGIN } from '../core.const';
 
 export const createEnvironmentPlugin = <Schema extends TSchema>(schema: Schema) =>
-  new Elysia({ name: 'plugin.environment' }).use((app) => {
+  new Elysia({ name: ENVIRONMENT_PLUGIN }).use((app) => {
     const env = envSchema<Static<Schema>>({
       schema,
       dotenv: import.meta.env.NODE_ENV === 'development',
