@@ -1,8 +1,21 @@
 # Change Log - @bltx/web
 
-<!-- This log was last generated on Wed, 08 Oct 2025 06:01:16 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 21 Oct 2025 05:45:17 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.1.0
+
+Tue, 21 Oct 2025 05:45:17 GMT
+
+### Minor changes
+
+- build: add type checking (ben@voiceflow.com)
+
+### Patches
+
+- fix: use rollup vanilla extract plugin (ben@voiceflow.com)
+- fix: web lib build (ben@voiceflow.com)
 
 ## 1.0.3
 

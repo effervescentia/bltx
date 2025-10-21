@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "build: add type checking",
-  "packageName": "@bltx/test",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}

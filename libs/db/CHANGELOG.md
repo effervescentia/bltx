@@ -1,8 +1,16 @@
 # Change Log - @bltx/db
 
-<!-- This log was last generated on Tue, 21 Oct 2025 03:37:52 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 21 Oct 2025 05:45:17 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.6.0
+
+Tue, 21 Oct 2025 05:45:17 GMT
+
+### Minor changes
+
+- build: add type checking (ben@voiceflow.com)
 
 ## 1.5.1
 
