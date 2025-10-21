@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "feat: generic pg driver support",
-  "packageName": "@bltx/db",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}

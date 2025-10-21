@@ -1,8 +1,16 @@
 # Change Log - @bltx/db
 
-<!-- This log was last generated on Sat, 11 Oct 2025 10:03:22 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 21 Oct 2025 03:02:19 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.4.0
+
+Tue, 21 Oct 2025 03:02:19 GMT
+
+### Minor changes
+
+- feat: generic pg driver support (ben@voiceflow.com)
 
 ## 1.3.2
 
