@@ -2,16 +2,16 @@ import type { AnyRecord } from '@bltx/core';
 import type { ExtractTablesWithRelations } from 'drizzle-orm';
 import type {
   AnyPgColumn,
+  PgDatabase,
   PgQueryResultHKT,
   PgTableWithColumns,
   PgTransaction,
   SubqueryWithSelection,
   TableConfig,
 } from 'drizzle-orm/pg-core';
-import type { PgliteDatabase } from 'drizzle-orm/pglite';
 import type { Merge } from 'type-fest';
 
-export type Database<Schema extends AnyRecord> = PgliteDatabase<Schema> | Transaction<Schema>;
+export type Database<Schema extends AnyRecord> = PgDatabase<any, Schema> | Transaction<Schema>;
 
 export type AnyDatabase = Database<any>;
 
