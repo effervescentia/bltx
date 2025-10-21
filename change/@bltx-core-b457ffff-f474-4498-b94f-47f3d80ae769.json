@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "feat: disable logger outside of development",
-  "packageName": "@bltx/core",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}
