@@ -1,8 +1,16 @@
 # Change Log - @bltx/db
 
-<!-- This log was last generated on Tue, 21 Oct 2025 03:02:19 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 21 Oct 2025 03:14:48 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.5.0
+
+Tue, 21 Oct 2025 03:14:48 GMT
+
+### Minor changes
+
+- feat: accept env in db plugin (ben@voiceflow.com)
 
 ## 1.4.0
 
