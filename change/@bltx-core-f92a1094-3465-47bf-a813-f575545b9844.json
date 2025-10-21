@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "feat: make env a function",
+  "packageName": "@bltx/core",
+  "email": "ben@voiceflow.com",
+  "dependentChangeType": "patch"
+}

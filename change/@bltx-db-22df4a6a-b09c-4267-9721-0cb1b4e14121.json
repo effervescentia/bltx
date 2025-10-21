@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix: disable db plugin in test",
+  "packageName": "@bltx/db",
+  "email": "ben@voiceflow.com",
+  "dependentChangeType": "patch"
+}
