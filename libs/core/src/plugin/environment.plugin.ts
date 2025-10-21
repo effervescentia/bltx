@@ -6,7 +6,11 @@ import { ENVIRONMENT_PLUGIN } from '../core.const';
 export const createEnvironmentPlugin = <Schema extends TSchema>(schema: Schema) =>
   new Elysia({ name: ENVIRONMENT_PLUGIN }).use((app) => {
     if (import.meta.env.NODE_ENV === 'test') {
-      return app.decorate({ env: () => null as Static<Schema> });
+      return app.decorate({
+        env: (): Static<Schema> => {
+          throw new Error('environment plugin should not be used in a test environment');
+        },
+      });
     }
 
     const env = envSchema<Static<Schema>>({
