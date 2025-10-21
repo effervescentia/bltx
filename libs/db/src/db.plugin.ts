@@ -9,6 +9,7 @@ import { drizzle as drizzleBunSQL } from 'drizzle-orm/bun-sql';
 import { drizzle as drizzlePGlite } from 'drizzle-orm/pglite';
 import Elysia, { type SingletonBase } from 'elysia';
 import { match } from 'ts-pattern';
+import { DATABASE_PLUGIN } from './db.const';
 
 export type DatabaseOptions<Schema, Env> =
   | {
@@ -33,7 +34,7 @@ export const createPGliteDatabaseClient = (options?: PGliteOptions) =>
 export const createDatabasePlugin = <Schema extends AnyRecord, Env extends AnyRecord>(
   options: DatabaseOptions<Schema, Env>,
 ) =>
-  new Elysia({ name: 'plugin.database' }).use(options.env).use((app) => {
+  new Elysia({ name: DATABASE_PLUGIN }).use(options.env).use((app) => {
     const db = match(options)
       .with({ type: 'bun-sql' }, ({ schema, factory }) => drizzleBunSQL({ schema, client: factory(app.decorator.env) }))
       .with({ type: 'pglite' }, ({ schema, factory }) => drizzlePGlite({ schema, client: factory(app.decorator.env) }))

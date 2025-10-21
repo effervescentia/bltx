@@ -3,6 +3,10 @@
   "version": "1.2.0",
   "type": "module",
   "main": "src/main.ts",
+  "exports": {
+    ".": "./src/main.ts",
+    "./test": "./src/test/main.ts"
+  },
   "files": [
     "src"
   ],

@@ -1,3 +1,3 @@
-export * from './environment.plugin';
-export * from './logger.plugin';
-export type * from './types';
+export type * from './core.types';
+export * from './plugin/environment.plugin';
+export * from './plugin/logger.plugin';
