@@ -48,7 +48,11 @@ export const createDatabasePlugin = <Schema extends AnyRecord, Env extends AnyRe
 ) =>
   new Elysia({ name: DATABASE_PLUGIN }).use(options.env).use((app) => {
     if (import.meta.env.NODE_ENV === 'test') {
-      return app.decorate({ db: () => null! as DatabaseLike<any> });
+      return app.decorate({
+        db: (): DatabaseLike<Schema> => {
+          throw new Error('database plugin should not be used in a test environment');
+        },
+      });
     }
 
     const db = match(options)
