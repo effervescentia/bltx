@@ -1,8 +1,16 @@
 # Change Log - @bltx/web
 
-<!-- This log was last generated on Tue, 21 Oct 2025 05:45:17 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 21 Oct 2025 06:18:28 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.1.1
+
+Tue, 21 Oct 2025 06:18:28 GMT
+
+### Patches
+
+- fix: use rollup vanilla plugin properly (ben@voiceflow.com)
 
 ## 1.1.0
 
