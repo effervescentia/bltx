@@ -15,9 +15,10 @@
     "ts-pattern": "5.8.0"
   },
   "devDependencies": {
-    "@types/inquirer": "9.0.9"
+    "@types/inquirer": "9.0.9",
+    "plop": "4.0.4"
   },
   "peerDependencies": {
-    "plop": "4.0.4"
+    "plop": "^4"
   }
 }
