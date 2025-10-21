@@ -1,8 +1,7 @@
-import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
+import { vanillaExtractPlugin } from '@vanilla-extract/rollup-plugin';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  plugins: [vanillaExtractPlugin({ identifiers: ({ hash }) => `bltx_${hash}` })],
   build: {
     outDir: 'build',
     sourcemap: true,
@@ -13,6 +12,13 @@ export default defineConfig({
       fileName: 'main',
     },
     rollupOptions: {
+      plugins: [vanillaExtractPlugin({ identifiers: ({ hash }) => `bltx_${hash}` })],
+      output: {
+        preserveModules: true,
+        assetFileNames({ name }) {
+          return name?.replace(/^src\//, '') ?? '';
+        },
+      },
       external: (id) => {
         if (id.includes('/node_modules/')) return true;
         if (id.includes('/src/')) return false;

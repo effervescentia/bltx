@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix: use rollup vanilla extract plugin",
+  "packageName": "@bltx/web",
+  "email": "ben@voiceflow.com",
+  "dependentChangeType": "patch"
+}
