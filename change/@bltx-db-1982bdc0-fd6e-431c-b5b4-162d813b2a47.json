@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "feat: accept env in db plugin",
+  "packageName": "@bltx/db",
+  "email": "ben@voiceflow.com",
+  "dependentChangeType": "patch"
+}
