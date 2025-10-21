@@ -1,8 +1,16 @@
 # Change Log - @bltx/db
 
-<!-- This log was last generated on Tue, 21 Oct 2025 03:14:48 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 21 Oct 2025 03:37:52 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.5.1
+
+Tue, 21 Oct 2025 03:37:52 GMT
+
+### Patches
+
+- fix: correct generic db type (ben@voiceflow.com)
 
 ## 1.5.0
 
