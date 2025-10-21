@@ -1,17 +1,15 @@
 import Elysia from 'elysia';
-import logixlysia, { createLogger } from 'logixlysia';
+import logixlysia from 'logixlysia';
 import { LOGGER_PLUGIN } from '../core.const';
 
 export const LoggerPlugin = new Elysia({ name: LOGGER_PLUGIN }).use((app) => {
-  const log = createLogger();
+  if (import.meta.env.NODE_ENV !== 'development') return app;
 
-  return app
-    .use(
-      logixlysia({
-        config: {
-          startupMessageFormat: 'simple',
-        },
-      }),
-    )
-    .decorate({ log });
+  return app.use(
+    logixlysia({
+      config: {
+        startupMessageFormat: 'simple',
+      },
+    }),
+  );
 });
