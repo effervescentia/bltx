@@ -26,14 +26,17 @@
     },
     "libs/db": {
       "name": "@bltx/db",
-      "version": "1.5.0",
+      "version": "1.5.1",
       "dependencies": {
         "ts-pattern": "5.8.0",
         "type-fest": "4.41.0",
       },
+      "devDependencies": {
+        "@electric-sql/pglite": "0.3.5",
+      },
       "peerDependencies": {
         "@bltx/core": "workspace:*",
-        "@electric-sql/pglite": "0.3.5",
+        "@electric-sql/pglite": "^0.3",
         "drizzle-kit": "0.31.4",
         "drizzle-orm": "0.44.3",
         "elysia": "1.3.6",
@@ -60,7 +63,7 @@
     },
     "libs/test": {
       "name": "@bltx/test",
-      "version": "1.2.2",
+      "version": "1.2.3",
       "peerDependencies": {
         "@bltx/core": "workspace:*",
         "@bltx/db": "workspace:*",
