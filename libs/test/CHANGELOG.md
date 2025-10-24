@@ -1,8 +1,16 @@
 # Change Log - @bltx/test
 
-<!-- This log was last generated on Tue, 21 Oct 2025 16:35:09 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 24 Oct 2025 19:43:49 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.4.4
+
+Fri, 24 Oct 2025 19:43:49 GMT
+
+### Patches
+
+- fix: better db client lifecycle management (ben@voiceflow.com)
 
 ## 1.4.1
 
