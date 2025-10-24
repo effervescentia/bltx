@@ -1,8 +1,16 @@
 # Change Log - @bltx/test
 
-<!-- This log was last generated on Fri, 24 Oct 2025 19:51:15 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 24 Oct 2025 20:05:33 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.4.6
+
+Fri, 24 Oct 2025 20:05:33 GMT
+
+### Patches
+
+- fix: account for bug in bun test library (ben@voiceflow.com)
 
 ## 1.4.5
 

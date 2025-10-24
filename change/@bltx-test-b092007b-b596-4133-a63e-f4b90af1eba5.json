@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix: account for bug in bun test library",
-  "packageName": "@bltx/test",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}
