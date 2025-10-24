@@ -1,8 +1,16 @@
 # Change Log - @bltx/db
 
-<!-- This log was last generated on Tue, 21 Oct 2025 16:41:38 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 24 Oct 2025 21:10:36 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.6.5
+
+Fri, 24 Oct 2025 21:10:36 GMT
+
+### Patches
+
+- fix: allow type inference using db plugin (ben@voiceflow.com)
 
 ## 1.6.3
 

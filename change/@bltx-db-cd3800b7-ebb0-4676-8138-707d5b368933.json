@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix: allow type inference using db plugin",
-  "packageName": "@bltx/db",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}
