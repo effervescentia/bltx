@@ -32,20 +32,26 @@ export const integrationTestFactory = <Schema extends AnyRecord, Env extends Any
       });
     };
 
-    beforeAll(async () => {
-      app = new Elysia().use(dbPlugin).use(envPlugin).use(controller);
-      await app.modules;
-      client = dbPlugin.decorator.db().$client;
-    });
+    beforeAll(
+      async () => {
+        app = new Elysia().use(dbPlugin).use(envPlugin).use(controller);
+        await app.modules;
+        client = dbPlugin.decorator.db().$client;
+      },
+      { timeout: 10000 },
+    );
 
-    afterAll(async () => {
-      if (!client) return;
+    afterAll(
+      async () => {
+        if (!client) return;
 
-      await client.close();
-      if (client.dataDir) {
-        await fs.rm(client.dataDir, { recursive: true, force: true });
-      }
-    });
+        await client.close();
+        if (client.dataDir) {
+          await fs.rm(client.dataDir, { recursive: true, force: true });
+        }
+      },
+      { timeout: 10000 },
+    );
 
     return {
       app: () => app,

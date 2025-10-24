@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix: change beforeAll and afterAll timeout for integration tests",
+  "packageName": "@bltx/test",
+  "email": "ben@voiceflow.com",
+  "dependentChangeType": "patch"
+}
