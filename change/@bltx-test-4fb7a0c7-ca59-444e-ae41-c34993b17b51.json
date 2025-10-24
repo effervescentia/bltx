@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix: better db client lifecycle management",
+  "packageName": "@bltx/test",
+  "email": "ben@voiceflow.com",
+  "dependentChangeType": "patch"
+}

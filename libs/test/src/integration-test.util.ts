@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 import type { AnyRecord } from '@bltx/core';
 import { TestEnvironmentPluginFactory } from '@bltx/core/test';
 import { TestDatabasePluginFactory } from '@bltx/db/test';
+import type { PGlite } from '@electric-sql/pglite';
 import { sql } from 'drizzle-orm';
 import Elysia, { type AnyElysia } from 'elysia';
 
@@ -20,6 +21,7 @@ export const integrationTestFactory = <Schema extends AnyRecord, Env extends Any
   return (controller: AnyElysia, envOverrides?: Partial<Env>) => {
     const dbPlugin = TestDatabasePlugin();
     const envPlugin = TestEnvironmentPluginFactory({ ...env, ...envOverrides });
+    let client: PGlite;
     let app: AnyElysia;
 
     const truncate = async () => {
@@ -33,10 +35,11 @@ export const integrationTestFactory = <Schema extends AnyRecord, Env extends Any
     beforeAll(async () => {
       app = new Elysia().use(dbPlugin).use(envPlugin).use(controller);
       await app.modules;
+      client = dbPlugin.decorator.db().$client;
     });
 
     afterAll(async () => {
-      const client = dbPlugin.decorator.db().$client;
+      if (!client) return;
 
       await client.close();
       if (client.dataDir) {

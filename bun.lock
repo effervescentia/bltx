@@ -15,7 +15,7 @@
     },
     "libs/core": {
       "name": "@bltx/core",
-      "version": "1.2.0",
+      "version": "1.5.0",
       "dependencies": {
         "env-schema": "6.0.1",
         "logixlysia": "5.1.0",
@@ -29,7 +29,7 @@
     },
     "libs/db": {
       "name": "@bltx/db",
-      "version": "1.6.0",
+      "version": "1.6.4",
       "dependencies": {
         "ts-pattern": "5.8.0",
         "type-fest": "4.41.0",
@@ -71,10 +71,11 @@
     },
     "libs/test": {
       "name": "@bltx/test",
-      "version": "1.3.0",
+      "version": "1.4.3",
       "devDependencies": {
         "@bltx/core": "workspace:*",
         "@bltx/db": "workspace:*",
+        "@electric-sql/pglite": "0.3.5",
         "drizzle-orm": "0.44.3",
         "elysia": "1.3.6",
       },
@@ -87,7 +88,7 @@
     },
     "libs/web": {
       "name": "@bltx/web",
-      "version": "1.1.0",
+      "version": "1.1.2",
       "devDependencies": {
         "@elysiajs/eden": "1.3.2",
         "@types/react": "19.0.2",
