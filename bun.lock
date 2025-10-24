@@ -71,7 +71,7 @@
     },
     "libs/test": {
       "name": "@bltx/test",
-      "version": "1.4.3",
+      "version": "1.4.6",
       "devDependencies": {
         "@bltx/core": "workspace:*",
         "@bltx/db": "workspace:*",
