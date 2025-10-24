@@ -32,16 +32,22 @@ export const integrationTestFactory = <Schema extends AnyRecord, Env extends Any
       });
     };
 
+    // TODO: update this once bun fixes this issue
+    // https://github.com/oven-sh/bun/issues/23133
+
     beforeAll(
+      null,
       async () => {
         app = new Elysia().use(dbPlugin).use(envPlugin).use(controller);
         await app.modules;
         client = dbPlugin.decorator.db().$client;
       },
-      { timeout: 10000 },
+      // @ts-ignore
+      10_000,
     );
 
     afterAll(
+      null,
       async () => {
         if (!client) return;
 
@@ -50,7 +56,8 @@ export const integrationTestFactory = <Schema extends AnyRecord, Env extends Any
           await fs.rm(client.dataDir, { recursive: true, force: true });
         }
       },
-      { timeout: 10000 },
+      // @ts-ignore
+      10_000,
     );
 
     return {
