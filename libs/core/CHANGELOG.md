@@ -1,8 +1,16 @@
 # Change Log - @bltx/core
 
-<!-- This log was last generated on Tue, 21 Oct 2025 21:09:27 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 28 Oct 2025 18:13:36 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.6.0
+
+Tue, 28 Oct 2025 18:13:36 GMT
+
+### Minor changes
+
+- feat: remove logger plugin (ben@voiceflow.com)
 
 ## 1.5.0
 

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix: update elysia",
-  "packageName": "@bltx/test",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}

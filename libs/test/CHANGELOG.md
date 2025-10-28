@@ -1,8 +1,16 @@
 # Change Log - @bltx/test
 
-<!-- This log was last generated on Fri, 24 Oct 2025 20:05:33 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 28 Oct 2025 18:13:36 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.4.8
+
+Tue, 28 Oct 2025 18:13:36 GMT
+
+### Patches
+
+- fix: update elysia (ben@voiceflow.com)
 
 ## 1.4.6
 
