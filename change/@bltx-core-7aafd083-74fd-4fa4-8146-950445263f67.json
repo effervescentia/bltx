@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "feat: remove logger plugin",
+  "packageName": "@bltx/core",
+  "email": "ben@voiceflow.com",
+  "dependentChangeType": "patch"
+}
