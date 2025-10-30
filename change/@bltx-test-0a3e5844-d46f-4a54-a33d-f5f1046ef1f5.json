@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix: integration test race condition",
+  "packageName": "@bltx/test",
+  "email": "ben@voiceflow.com",
+  "dependentChangeType": "patch"
+}
