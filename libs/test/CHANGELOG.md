@@ -1,8 +1,16 @@
 # Change Log - @bltx/test
 
-<!-- This log was last generated on Thu, 30 Oct 2025 03:10:41 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 30 Oct 2025 03:32:24 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.5.2
+
+Thu, 30 Oct 2025 03:32:24 GMT
+
+### Patches
+
+- fix: integration test race condition (ben@voiceflow.com)
 
 ## 1.5.1
 
