@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "feat: make integration test extensible",
+  "packageName": "@bltx/test",
+  "email": "ben@voiceflow.com",
+  "dependentChangeType": "patch"
+}
