@@ -1,8 +1,16 @@
 # Change Log - @bltx/test
 
-<!-- This log was last generated on Tue, 28 Oct 2025 18:13:36 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 30 Oct 2025 02:59:47 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.5.0
+
+Thu, 30 Oct 2025 02:59:47 GMT
+
+### Minor changes
+
+- feat: make integration test extensible (ben@voiceflow.com)
 
 ## 1.4.8
 
