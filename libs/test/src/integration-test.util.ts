@@ -7,9 +7,18 @@ import type { PGlite } from '@electric-sql/pglite';
 import { sql } from 'drizzle-orm';
 import Elysia, { type AnyElysia } from 'elysia';
 
-export interface IntegrationTestOptions {
-  /** truncate tables in between tests */
-  autoClean?: boolean;
+type TestApp<Schema extends AnyRecord, Env extends AnyRecord> = ReturnType<typeof createApp<Schema, Env>>;
+
+const createApp = <Schema extends AnyRecord, Env extends AnyRecord>(
+  dbPlugin: ReturnType<ReturnType<typeof TestDatabasePluginFactory<Schema>>>,
+  envPlugin: ReturnType<typeof TestEnvironmentPluginFactory<Env>>,
+) => {
+  return new Elysia().use(dbPlugin).use(envPlugin);
+};
+
+export interface IntegrationTestOptions<Schema extends AnyRecord, Env extends AnyRecord> {
+  env?: Partial<Env>;
+  use?: <T extends Elysia>(app: TestApp<Schema, Env>) => T;
 }
 
 export const integrationTestFactory = <Schema extends AnyRecord, Env extends AnyRecord = never>(
@@ -18,7 +27,7 @@ export const integrationTestFactory = <Schema extends AnyRecord, Env extends Any
 ) => {
   const TestDatabasePlugin = TestDatabasePluginFactory(schema);
 
-  return (controller: AnyElysia, envOverrides?: Partial<Env>) => {
+  return (controller: AnyElysia, { env: envOverrides, use }: IntegrationTestOptions<Schema, Env> = {}) => {
     const dbPlugin = TestDatabasePlugin();
     const envPlugin = TestEnvironmentPluginFactory({ ...env, ...envOverrides });
     let client: PGlite;
@@ -38,7 +47,9 @@ export const integrationTestFactory = <Schema extends AnyRecord, Env extends Any
     beforeAll(
       null,
       async () => {
-        app = new Elysia().use(dbPlugin).use(envPlugin).use(controller);
+        app = createApp(dbPlugin, envPlugin);
+        app = use?.(app) ?? app;
+        app = app.use(controller);
         await app.modules;
         client = dbPlugin.decorator.db().$client;
       },
