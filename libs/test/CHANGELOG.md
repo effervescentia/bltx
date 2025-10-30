@@ -1,8 +1,16 @@
 # Change Log - @bltx/test
 
-<!-- This log was last generated on Thu, 30 Oct 2025 02:59:47 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 30 Oct 2025 03:10:41 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.5.1
+
+Thu, 30 Oct 2025 03:10:41 GMT
+
+### Patches
+
+- fix: simplify test app types (ben@voiceflow.com)
 
 ## 1.5.0
 
