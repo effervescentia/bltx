@@ -1,8 +1,16 @@
 # Change Log - @bltx/web
 
-<!-- This log was last generated on Tue, 21 Oct 2025 06:23:56 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 31 Oct 2025 08:22:57 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.2.0
+
+Fri, 31 Oct 2025 08:22:57 GMT
+
+### Minor changes
+
+- feat: refreshable resources (ben@voiceflow.com)
 
 ## 1.1.2
 
