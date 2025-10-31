@@ -21,7 +21,7 @@ export const integrationTestFactory = <Schema extends AnyRecord, Env extends Any
   return (controller: AnyElysia, { env: envOverrides, use }: IntegrationTestOptions<Env> = {}) => {
     const dbPlugin = TestDatabasePlugin();
     const envPlugin = TestEnvironmentPluginFactory({ ...env, ...envOverrides });
-    const client: PGlite = dbPlugin.decorator.db().$client;
+    let client: PGlite;
     let app: AnyElysia;
 
     const truncate = async () => {
@@ -42,6 +42,7 @@ export const integrationTestFactory = <Schema extends AnyRecord, Env extends Any
         app = use?.(app) ?? app;
         app = app.use(controller);
         await app.modules;
+        client = dbPlugin.decorator.db().$client;
       },
       // @ts-ignore
       10_000,
@@ -50,6 +51,8 @@ export const integrationTestFactory = <Schema extends AnyRecord, Env extends Any
     afterAll(
       null,
       async () => {
+        if (!client) return;
+
         await client.close();
         if (client.dataDir) {
           await fs.rm(client.dataDir, { recursive: true, force: true });
