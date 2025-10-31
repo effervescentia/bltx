@@ -7,18 +7,29 @@ import type { PGlite } from '@electric-sql/pglite';
 import { sql } from 'drizzle-orm';
 import Elysia, { type AnyElysia } from 'elysia';
 
+export interface IntegrationFactoryOptions<Schema extends AnyRecord, Env extends AnyRecord> {
+  schema: Schema;
+  env?: Env;
+  timeout?: number;
+}
+
 export interface IntegrationTestOptions<Env extends AnyRecord> {
   env?: Partial<Env>;
   use?: (app: AnyElysia) => AnyElysia;
+  timeout?: number;
 }
 
-export const integrationTestFactory = <Schema extends AnyRecord, Env extends AnyRecord = never>(
-  schema: Schema,
-  env?: Env,
-) => {
+export const integrationTestFactory = <Schema extends AnyRecord, Env extends AnyRecord = never>({
+  schema,
+  env,
+  timeout = 10_000,
+}: IntegrationFactoryOptions<Schema, Env>) => {
   const TestDatabasePlugin = TestDatabasePluginFactory(schema);
 
-  return (controller: AnyElysia, { env: envOverrides, use }: IntegrationTestOptions<Env> = {}) => {
+  return (
+    controller: AnyElysia,
+    { env: envOverrides, timeout: timeoutOverride, use }: IntegrationTestOptions<Env> = {},
+  ) => {
     const dbPlugin = TestDatabasePlugin();
     const envPlugin = TestEnvironmentPluginFactory({ ...env, ...envOverrides });
     let client: PGlite;
@@ -45,7 +56,7 @@ export const integrationTestFactory = <Schema extends AnyRecord, Env extends Any
         client = dbPlugin.decorator.db().$client;
       },
       // @ts-ignore
-      10_000,
+      timeoutOverride ?? timeout,
     );
 
     afterAll(
@@ -59,7 +70,7 @@ export const integrationTestFactory = <Schema extends AnyRecord, Env extends Any
         }
       },
       // @ts-ignore
-      10_000,
+      timeoutOverride ?? timeout,
     );
 
     return {
