@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "feat: configurable integration setup and teardown timeout",
-  "packageName": "@bltx/test",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}

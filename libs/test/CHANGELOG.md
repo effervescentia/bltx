@@ -1,8 +1,16 @@
 # Change Log - @bltx/test
 
-<!-- This log was last generated on Fri, 31 Oct 2025 03:09:49 GMT and should not be manually modified. -->
+<!-- This log was last generated on Fri, 31 Oct 2025 07:56:02 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.6.0
+
+Fri, 31 Oct 2025 07:56:02 GMT
+
+### Minor changes
+
+- feat: configurable integration setup and teardown timeout (ben@voiceflow.com)
 
 ## 1.5.3
 
