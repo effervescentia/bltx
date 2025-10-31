@@ -1,6 +1,6 @@
 import type { Treaty } from '@elysiajs/eden';
 import { atom, useAtom } from 'jotai';
-import { atomFamily, loadable } from 'jotai/utils';
+import { atomFamily, atomWithRefresh, loadable } from 'jotai/utils';
 import { useEffect } from 'react';
 
 export type ResourceValue<T> =
@@ -16,8 +16,8 @@ export interface ResourceOptions {
 export const resource = <T>(fetch: (resourceID: string) => Promise<Treaty.TreatyResponse<{ 200: T }>>) => {
   const family = atomFamily((resourceID: string) => loadable(atom(() => fetch(resourceID))));
 
-  return (resourceID: string, options?: ResourceOptions): ResourceValue<T> => {
-    const [value] = useAtom(family(resourceID));
+  return (resourceID: string, options?: ResourceOptions): ResourceValue<T> & { refresh: () => void } => {
+    const [value, refresh] = useAtom(atomWithRefresh((get) => get(family(resourceID))));
     const notFound = value.state === 'hasData' && !value.data.data;
 
     useEffect(() => {
@@ -27,35 +27,35 @@ export const resource = <T>(fetch: (resourceID: string) => Promise<Treaty.Treaty
     }, [notFound, options?.onNotFound]);
 
     if (notFound) {
-      return { state: 'notFound' } as const;
+      return { state: 'notFound', refresh } as const;
     }
 
     if (value.state === 'hasData') {
       if (value.data.error) {
-        return { state: 'hasError', error: value.data.error } as const;
+        return { state: 'hasError', error: value.data.error, refresh } as const;
       }
 
-      return { state: 'hasData', data: value.data.data } as const;
+      return { state: 'hasData', data: value.data.data, refresh } as const;
     }
 
-    return value;
+    return { ...value, refresh };
   };
 };
 
 export const resources = <T>(fetch: () => Promise<Treaty.TreatyResponse<{ 200: T }>>) => {
   const loadableAtom = loadable(atom(fetch));
 
-  return (): ResourceValue<T> => {
-    const [value] = useAtom(loadableAtom);
+  return (): ResourceValue<T> & { refresh: () => void } => {
+    const [value, refresh] = useAtom(atomWithRefresh((get) => get(loadableAtom)));
 
     if (value.state === 'hasData') {
       if (value.data.error) {
-        return { state: 'hasError', error: value.data.error } as const;
+        return { state: 'hasError', error: value.data.error, refresh } as const;
       }
 
-      return { state: 'hasData', data: value.data.data } as const;
+      return { state: 'hasData', data: value.data.data, refresh } as const;
     }
 
-    return value;
+    return { ...value, refresh };
   };
 };
