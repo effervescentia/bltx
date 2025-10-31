@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "feat: refreshable resources",
+  "packageName": "@bltx/web",
+  "email": "ben@voiceflow.com",
+  "dependentChangeType": "patch"
+}
