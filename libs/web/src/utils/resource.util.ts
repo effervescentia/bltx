@@ -1,8 +1,7 @@
 import type { Treaty } from '@elysiajs/eden';
-import { atom, useAtom } from 'jotai';
+import type { WritableAtom } from 'jotai';
+import { atom } from 'jotai';
 import { atomFamily, atomWithRefresh, loadable } from 'jotai/utils';
-import { useEffect } from 'react';
-import { useConst } from '../hooks/use-const.hook';
 
 export type ResourceValue<T> =
   | { state: 'loading' }
@@ -14,15 +13,19 @@ export interface ResourceOptions {
   onNotFound?: () => void;
 }
 
-export const resource = <T>(fetch: () => Promise<Treaty.TreatyResponse<{ 200: T }>>) => {
+export interface StaticResourceAtom<T> extends WritableAtom<ResourceValue<T>, [], void> {
+  taint: () => void;
+}
+
+export const staticResource = <T>(fetch: () => Promise<Treaty.TreatyResponse<{ 200: T }>>): StaticResourceAtom<T> => {
   const load = loadable(atom(fetch));
-  const refreshAtom = atomWithRefresh((get) => get(load));
+  const refresh = atomWithRefresh((get) => get(load));
 
   let tainted = false;
 
   const derivedAtom = atom(
     (get): ResourceValue<T> => {
-      const value = get(refreshAtom);
+      const value = get(refresh);
 
       if (value.state === 'hasData') {
         if (value.data.error) {
@@ -34,7 +37,7 @@ export const resource = <T>(fetch: () => Promise<Treaty.TreatyResponse<{ 200: T 
 
       return value;
     },
-    (_, set) => set(refreshAtom),
+    (_, set) => set(refresh),
   );
 
   derivedAtom.onMount = (refresh) => {
@@ -44,29 +47,52 @@ export const resource = <T>(fetch: () => Promise<Treaty.TreatyResponse<{ 200: T 
     }
   };
 
-  return {
-    atom: derivedAtom,
+  return Object.assign(derivedAtom, {
     taint: () => {
       tainted = true;
     },
-  };
+  });
 };
 
-export const resources = <T>(fetch: () => Promise<Treaty.TreatyResponse<{ 200: T }>>) => {
-  const loadableAtom = loadable(atom(fetch));
+export const dynamicResource = <T>(fetch: (resourceID: string) => Promise<Treaty.TreatyResponse<{ 200: T }>>) =>
+  atomFamily((resourceID: string) => {
+    const load = loadable(atom(() => fetch(resourceID)));
+    const refresh = atomWithRefresh((get) => get(load));
 
-  return (): ResourceValue<T> & { refresh: () => void } => {
-    const refreshAtom = useConst(() => atomWithRefresh((get) => get(loadableAtom)));
-    const [value, refresh] = useAtom(refreshAtom);
+    let tainted = false;
 
-    if (value.state === 'hasData') {
-      if (value.data.error) {
-        return { state: 'hasError', error: value.data.error, refresh } as const;
+    const derivedAtom = atom(
+      (get): ResourceValue<T> => {
+        const value = get(refresh);
+        const notFound = value.state === 'hasData' && !value.data.data;
+
+        if (notFound) {
+          return { state: 'notFound' } as const;
+        }
+
+        if (value.state === 'hasData') {
+          if (value.data.error) {
+            return { state: 'hasError', error: value.data.error } as const;
+          }
+
+          return { state: 'hasData', data: value.data.data } as const;
+        }
+
+        return value;
+      },
+      (_, set) => set(refresh),
+    );
+
+    derivedAtom.onMount = (refresh) => {
+      if (tainted) {
+        tainted = false;
+        refresh();
       }
+    };
 
-      return { state: 'hasData', data: value.data.data, refresh } as const;
-    }
-
-    return { ...value, refresh };
-  };
-};
+    return Object.assign(derivedAtom, {
+      taint: () => {
+        tainted = true;
+      },
+    });
+  });
