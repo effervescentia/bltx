@@ -14,33 +14,41 @@ export interface ResourceOptions {
   onNotFound?: () => void;
 }
 
-export const resource = <T>(fetch: (resourceID: string) => Promise<Treaty.TreatyResponse<{ 200: T }>>) => {
-  const family = atomFamily((resourceID: string) => loadable(atom(() => fetch(resourceID))));
+export const resource = <T>(fetch: () => Promise<Treaty.TreatyResponse<{ 200: T }>>) => {
+  const load = loadable(atom(fetch));
+  const refreshAtom = atomWithRefresh((get) => get(load));
 
-  return (resourceID: string, options?: ResourceOptions): ResourceValue<T> & { refresh: () => void } => {
-    const refreshAtom = useConst(() => atomWithRefresh((get) => get(family(resourceID))));
-    const [value, refresh] = useAtom(refreshAtom);
-    const notFound = value.state === 'hasData' && !value.data.data;
+  let tainted = false;
 
-    useEffect(() => {
-      if (notFound) {
-        options?.onNotFound?.();
-      }
-    }, [notFound, options?.onNotFound]);
+  const derivedAtom = atom(
+    (get): ResourceValue<T> => {
+      const value = get(refreshAtom);
 
-    if (notFound) {
-      return { state: 'notFound', refresh } as const;
-    }
+      if (value.state === 'hasData') {
+        if (value.data.error) {
+          return { state: 'hasError', error: value.data.error } as const;
+        }
 
-    if (value.state === 'hasData') {
-      if (value.data.error) {
-        return { state: 'hasError', error: value.data.error, refresh } as const;
+        return { state: 'hasData', data: value.data.data } as const;
       }
 
-      return { state: 'hasData', data: value.data.data, refresh } as const;
-    }
+      return value;
+    },
+    (_, set) => set(refreshAtom),
+  );
 
-    return { ...value, refresh };
+  derivedAtom.onMount = (refresh) => {
+    if (tainted) {
+      tainted = false;
+      refresh();
+    }
+  };
+
+  return {
+    atom: derivedAtom,
+    taint: () => {
+      tainted = true;
+    },
   };
 };
 
