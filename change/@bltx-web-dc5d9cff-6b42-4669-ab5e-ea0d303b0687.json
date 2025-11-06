@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "feat: resources as atoms",
-  "packageName": "@bltx/web",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}

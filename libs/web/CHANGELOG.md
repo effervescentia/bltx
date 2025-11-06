@@ -1,8 +1,16 @@
 # Change Log - @bltx/web
 
-<!-- This log was last generated on Thu, 06 Nov 2025 07:17:56 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 06 Nov 2025 08:35:28 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.3.0
+
+Thu, 06 Nov 2025 08:35:28 GMT
+
+### Minor changes
+
+- feat: resources as atoms (ben@voiceflow.com)
 
 ## 1.2.1
 
