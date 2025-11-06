@@ -1,8 +1,16 @@
 # Change Log - @bltx/web
 
-<!-- This log was last generated on Thu, 06 Nov 2025 08:54:10 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 06 Nov 2025 09:36:12 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.4.1
+
+Thu, 06 Nov 2025 09:36:12 GMT
+
+### Patches
+
+- fix: handle refresh properly (ben@voiceflow.com)
 
 ## 1.4.0
 

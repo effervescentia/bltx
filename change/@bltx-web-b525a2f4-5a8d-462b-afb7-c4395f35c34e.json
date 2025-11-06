@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix: handle refresh properly",
-  "packageName": "@bltx/web",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}
