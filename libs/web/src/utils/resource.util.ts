@@ -9,12 +9,12 @@ export type ResourceValue<T> =
   | { state: 'hasError'; error: unknown }
   | { state: 'hasData'; data: Extract<Treaty.TreatyResponse<{ 200: T }>, { error: null }>['data'] };
 
-export interface ResourceOptions {
-  onNotFound?: () => void;
-}
-
 export interface StaticResourceAtom<T> extends WritableAtom<ResourceValue<T>, [], void> {
   taint: () => void;
+}
+
+export interface DynamicResourceAtom<T> extends ReturnType<typeof atomFamily<string, StaticResourceAtom<T>>> {
+  taint: (resourceID: string) => void;
 }
 
 export const staticResource = <T>(fetch: () => Promise<Treaty.TreatyResponse<{ 200: T }>>): StaticResourceAtom<T> => {
@@ -54,10 +54,12 @@ export const staticResource = <T>(fetch: () => Promise<Treaty.TreatyResponse<{ 2
   });
 };
 
-export const dynamicResource = <T>(fetch: (resourceID: string) => Promise<Treaty.TreatyResponse<{ 200: T }>>) => {
+export const dynamicResource = <T>(
+  fetch: (resourceID: string) => Promise<Treaty.TreatyResponse<{ 200: T }>>,
+): DynamicResourceAtom<T> => {
   const tainted = new Set<string>();
 
-  return atomFamily((resourceID: string) => {
+  const family = atomFamily((resourceID: string): StaticResourceAtom<T> => {
     const load = loadable(atom(() => fetch(resourceID)));
     const refresh = atomWithRefresh((get) => get(load));
 
@@ -95,5 +97,11 @@ export const dynamicResource = <T>(fetch: (resourceID: string) => Promise<Treaty
         tainted.add(resourceID);
       },
     });
+  });
+
+  return Object.assign(family, {
+    taint: (resourceID: string) => {
+      tainted.add(resourceID);
+    },
   });
 };
