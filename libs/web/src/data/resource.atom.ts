@@ -17,7 +17,7 @@ export interface DynamicResourceAtom<T> extends ReturnType<typeof atomFamily<str
   taint: (resourceID: string) => void;
 }
 
-export const resource = <T>(fetch: () => Promise<Treaty.TreatyResponse<{ 200: T }>>) => {
+export const resourceAtom = <T>(fetch: () => Promise<Treaty.TreatyResponse<{ 200: T }>>) => {
   const local = atom(null as ResourceValue<T> | null);
   const refresh = atomWithRefresh(() => fetch());
   const load = loadable(refresh);
@@ -50,17 +50,19 @@ export const resource = <T>(fetch: () => Promise<Treaty.TreatyResponse<{ 200: T 
   );
 };
 
-export const staticResource = <T>(fetch: () => Promise<Treaty.TreatyResponse<{ 200: T }>>): StaticResourceAtom<T> => {
-  const resourceAtom = resource(fetch);
+export const staticResourceAtom = <T>(
+  fetch: () => Promise<Treaty.TreatyResponse<{ 200: T }>>,
+): StaticResourceAtom<T> => {
+  const resource = resourceAtom(fetch);
 
   let tainted = false;
 
   const derivedAtom = atom<ResourceValue<T>, [] | [T], void>(
-    (get) => get(resourceAtom),
+    (get) => get(resource),
     (_, set, value?) => {
       tainted = false;
 
-      set(resourceAtom, value);
+      set(resource, value);
     },
   );
 
@@ -77,19 +79,19 @@ export const staticResource = <T>(fetch: () => Promise<Treaty.TreatyResponse<{ 2
   });
 };
 
-export const dynamicResource = <T>(
+export const dynamicResourceAtom = <T>(
   fetch: (resourceID: string) => Promise<Treaty.TreatyResponse<{ 200: T }>>,
 ): DynamicResourceAtom<T> => {
   const tainted = new Set<string>();
 
   const family = atomFamily((resourceID: string): StaticResourceAtom<T> => {
-    const resourceAtom = resource(() => fetch(resourceID));
+    const resource = resourceAtom(() => fetch(resourceID));
 
     const derivedAtom = atom<ResourceValue<T>, [] | [T], void>(
       (get) => {
-        const value = get(resourceAtom);
-        const notFound = value.state === 'hasData' && !value.data;
+        const value = get(resource);
 
+        const notFound = value.state === 'hasData' && !value.data;
         if (notFound) {
           return { state: 'notFound' } as const;
         }
@@ -99,7 +101,7 @@ export const dynamicResource = <T>(
       (_, set, value?) => {
         tainted.delete(resourceID);
 
-        set(resourceAtom, value);
+        set(resource, value);
       },
     );
 
