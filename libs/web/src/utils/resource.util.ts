@@ -54,12 +54,12 @@ export const staticResource = <T>(fetch: () => Promise<Treaty.TreatyResponse<{ 2
   });
 };
 
-export const dynamicResource = <T>(fetch: (resourceID: string) => Promise<Treaty.TreatyResponse<{ 200: T }>>) =>
-  atomFamily((resourceID: string) => {
+export const dynamicResource = <T>(fetch: (resourceID: string) => Promise<Treaty.TreatyResponse<{ 200: T }>>) => {
+  const tainted = new Set<string>();
+
+  return atomFamily((resourceID: string) => {
     const load = loadable(atom(() => fetch(resourceID)));
     const refresh = atomWithRefresh((get) => get(load));
-
-    let tainted = false;
 
     const derivedAtom = atom(
       (get): ResourceValue<T> => {
@@ -84,15 +84,16 @@ export const dynamicResource = <T>(fetch: (resourceID: string) => Promise<Treaty
     );
 
     derivedAtom.onMount = (refresh) => {
-      if (tainted) {
-        tainted = false;
+      if (tainted.has(resourceID)) {
+        tainted.delete(resourceID);
         refresh();
       }
     };
 
     return Object.assign(derivedAtom, {
       taint: () => {
-        tainted = true;
+        tainted.add(resourceID);
       },
     });
   });
+};
