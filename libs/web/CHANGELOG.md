@@ -1,8 +1,16 @@
 # Change Log - @bltx/web
 
-<!-- This log was last generated on Fri, 31 Oct 2025 08:22:57 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 06 Nov 2025 07:17:56 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.2.1
+
+Thu, 06 Nov 2025 07:17:56 GMT
+
+### Patches
+
+- fix: avoid infinite loop loading resources (ben@voiceflow.com)
 
 ## 1.2.0
 
