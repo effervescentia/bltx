@@ -33,5 +33,8 @@
     "jotai": "^2",
     "rainbow-sprinkles": "^1",
     "react": "^19"
+  },
+  "dependencies": {
+    "micro-memoize": "4.2.0"
   }
 }
