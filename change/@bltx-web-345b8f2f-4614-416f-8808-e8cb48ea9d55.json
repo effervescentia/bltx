@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "feat: global dynamic resource taint",
-  "packageName": "@bltx/web",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}

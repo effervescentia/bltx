@@ -1,8 +1,16 @@
 # Change Log - @bltx/web
 
-<!-- This log was last generated on Thu, 06 Nov 2025 08:35:28 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 06 Nov 2025 08:54:10 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.4.0
+
+Thu, 06 Nov 2025 08:54:10 GMT
+
+### Minor changes
+
+- feat: global dynamic resource taint (ben@voiceflow.com)
 
 ## 1.3.0
 
