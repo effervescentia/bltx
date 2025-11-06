@@ -18,14 +18,14 @@ export interface DynamicResourceAtom<T> extends ReturnType<typeof atomFamily<str
 }
 
 export const staticResource = <T>(fetch: () => Promise<Treaty.TreatyResponse<{ 200: T }>>): StaticResourceAtom<T> => {
-  const load = loadable(atom(fetch));
-  const refresh = atomWithRefresh((get) => get(load));
+  const refresh = atomWithRefresh(() => fetch());
+  const load = loadable(refresh);
 
   let tainted = false;
 
   const derivedAtom = atom(
     (get): ResourceValue<T> => {
-      const value = get(refresh);
+      const value = get(load);
 
       if (value.state === 'hasData') {
         if (value.data.error) {
@@ -60,12 +60,12 @@ export const dynamicResource = <T>(
   const tainted = new Set<string>();
 
   const family = atomFamily((resourceID: string): StaticResourceAtom<T> => {
-    const load = loadable(atom(() => fetch(resourceID)));
-    const refresh = atomWithRefresh((get) => get(load));
+    const refresh = atomWithRefresh(() => fetch(resourceID));
+    const load = loadable(refresh);
 
     const derivedAtom = atom(
       (get): ResourceValue<T> => {
-        const value = get(refresh);
+        const value = get(load);
         const notFound = value.state === 'hasData' && !value.data.data;
 
         if (notFound) {
