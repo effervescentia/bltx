@@ -1,8 +1,16 @@
 # Change Log - @bltx/web
 
-<!-- This log was last generated on Thu, 06 Nov 2025 09:36:12 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 06 Nov 2025 10:54:33 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.5.0
+
+Thu, 06 Nov 2025 10:54:33 GMT
+
+### Minor changes
+
+- feat: add setter to resource atoms (ben@voiceflow.com)
 
 ## 1.4.1
 

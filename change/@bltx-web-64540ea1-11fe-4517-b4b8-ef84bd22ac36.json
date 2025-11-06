@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "feat: add setter to resource atoms",
-  "packageName": "@bltx/web",
-  "email": "ben@voiceflow.com",
-  "dependentChangeType": "patch"
-}
