@@ -42,4 +42,6 @@ jobs:
       - name: Build
         run: bun run build
       - name: Release
-        run: bun run release
+        run: |
+          npm ci
+          bun run release
