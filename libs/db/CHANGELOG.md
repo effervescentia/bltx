@@ -1,8 +1,16 @@
 # Change Log - @bltx/db
 
-<!-- This log was last generated on Tue, 28 Oct 2025 18:13:36 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 17 Feb 2026 22:26:43 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 1.6.7
+
+Tue, 17 Feb 2026 22:26:43 GMT
+
+### Patches
+
+- fix: separate drizzle-kit from main db exports (ben@voiceflow.com)
 
 ## 1.6.6
 
