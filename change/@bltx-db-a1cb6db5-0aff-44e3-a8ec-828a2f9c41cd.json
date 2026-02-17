@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix: separate drizzle-kit from main db exports",
+  "packageName": "@bltx/db",
+  "email": "ben@voiceflow.com",
+  "dependentChangeType": "patch"
+}
