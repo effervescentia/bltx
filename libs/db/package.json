@@ -5,7 +5,8 @@
   "main": "src/main.ts",
   "exports": {
     ".": "./src/main.ts",
-    "./test": "./src/test/main.ts"
+    "./test": "./src/test/main.ts",
+    "./commands": "./src/commands/main.ts"
   },
   "files": [
     "src"
